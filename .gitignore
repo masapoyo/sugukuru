@@ -1,0 +1,13 @@
+# ステージ候補より除外するファイル・フォルダ一覧。
+
+# Office一時ファイル。
+**/~$*
+
+# eclipse動的プロジェクト。
+**/.settings/
+**/bin/
+**/build/
+**/WebContent/META-INF/
+**/WebContent/WEB-INF/
+**/.classpath
+**/.project
