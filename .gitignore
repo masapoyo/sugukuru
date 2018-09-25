@@ -2,6 +2,7 @@
 
 # Office一時ファイル。
 **/~$*
+*.tmp
 
 # eclipse動的プロジェクト。
 **/.settings/
