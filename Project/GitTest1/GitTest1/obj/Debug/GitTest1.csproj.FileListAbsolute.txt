@@ -1,0 +1,9 @@
+C:\Users\masap\Documents\sugukuru\Project\GitTest1\GitTest1\bin\Debug\GitTest1.exe.config
+C:\Users\masap\Documents\sugukuru\Project\GitTest1\GitTest1\bin\Debug\GitTest1.exe
+C:\Users\masap\Documents\sugukuru\Project\GitTest1\GitTest1\bin\Debug\GitTest1.pdb
+C:\Users\masap\Documents\sugukuru\Project\GitTest1\GitTest1\obj\Debug\GitTest1.csprojResolveAssemblyReference.cache
+C:\Users\masap\Documents\sugukuru\Project\GitTest1\GitTest1\obj\Debug\GitTest1.Properties.Resources.resources
+C:\Users\masap\Documents\sugukuru\Project\GitTest1\GitTest1\obj\Debug\GitTest1.csproj.GenerateResource.cache
+C:\Users\masap\Documents\sugukuru\Project\GitTest1\GitTest1\obj\Debug\GitTest1.csproj.CoreCompileInputs.cache
+C:\Users\masap\Documents\sugukuru\Project\GitTest1\GitTest1\obj\Debug\GitTest1.exe
+C:\Users\masap\Documents\sugukuru\Project\GitTest1\GitTest1\obj\Debug\GitTest1.pdb
