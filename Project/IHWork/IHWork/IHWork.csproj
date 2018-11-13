@@ -51,6 +51,18 @@
     <Compile Include="customerInfo.Designer.cs">
       <DependentUpon>customerInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="customerList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="customerList.Designer.cs">
+      <DependentUpon>customerList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="login.Designer.cs">
+      <DependentUpon>login.cs</DependentUpon>
+    </Compile>
     <Compile Include="OrderCheck.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +104,12 @@
     </Compile>
     <EmbeddedResource Include="customerInfo.resx">
       <DependentUpon>customerInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="customerList.resx">
+      <DependentUpon>customerList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="login.resx">
+      <DependentUpon>login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OrderCheck.resx">
       <DependentUpon>OrderCheck.cs</DependentUpon>
