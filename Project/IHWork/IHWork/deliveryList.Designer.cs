@@ -59,7 +59,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(147, 39);
             this.button1.TabIndex = 2;
-            this.button1.Text = "納品書発行";
+            this.button1.Text = "請求書発行";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // deliveryList
