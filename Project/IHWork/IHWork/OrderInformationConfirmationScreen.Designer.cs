@@ -48,6 +48,17 @@
             this.bt_ok = new System.Windows.Forms.Button();
             this.lb_rep = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.lbBuy = new System.Windows.Forms.Label();
+            this.lbExpen = new System.Windows.Forms.Label();
+            this.lbWinning = new System.Windows.Forms.Label();
+            this.lbSum = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -240,9 +251,9 @@
             // bt_ok
             // 
             this.bt_ok.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.bt_ok.Location = new System.Drawing.Point(157, 345);
+            this.bt_ok.Location = new System.Drawing.Point(464, 343);
             this.bt_ok.Name = "bt_ok";
-            this.bt_ok.Size = new System.Drawing.Size(112, 38);
+            this.bt_ok.Size = new System.Drawing.Size(112, 40);
             this.bt_ok.TabIndex = 17;
             this.bt_ok.Text = "確認";
             this.bt_ok.UseVisualStyleBackColor = true;
@@ -270,11 +281,121 @@
             this.label11.TabIndex = 18;
             this.label11.Text = "担当者";
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button1.Location = new System.Drawing.Point(582, 343);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(102, 40);
+            this.button1.TabIndex = 43;
+            this.button1.Text = "納品書発行";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lbSum);
+            this.groupBox1.Controls.Add(this.label18);
+            this.groupBox1.Controls.Add(this.lbBuy);
+            this.groupBox1.Controls.Add(this.lbExpen);
+            this.groupBox1.Controls.Add(this.lbWinning);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Controls.Add(this.label16);
+            this.groupBox1.Font = new System.Drawing.Font("MS UI Gothic", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.groupBox1.Location = new System.Drawing.Point(286, 86);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(398, 170);
+            this.groupBox1.TabIndex = 44;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "取引後";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label14.Location = new System.Drawing.Point(6, 102);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(53, 12);
+            this.label14.TabIndex = 38;
+            this.label14.Text = "買手数料";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label15.Location = new System.Drawing.Point(6, 77);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(93, 12);
+            this.label15.TabIndex = 37;
+            this.label15.Text = "オークション諸経費";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label16.Location = new System.Drawing.Point(6, 52);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(53, 12);
+            this.label16.TabIndex = 36;
+            this.label16.Text = "落札価格";
+            // 
+            // lbBuy
+            // 
+            this.lbBuy.AutoSize = true;
+            this.lbBuy.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lbBuy.Location = new System.Drawing.Point(142, 102);
+            this.lbBuy.Name = "lbBuy";
+            this.lbBuy.Size = new System.Drawing.Size(53, 12);
+            this.lbBuy.TabIndex = 41;
+            this.lbBuy.Text = "買手数料";
+            // 
+            // lbExpen
+            // 
+            this.lbExpen.AutoSize = true;
+            this.lbExpen.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lbExpen.Location = new System.Drawing.Point(142, 77);
+            this.lbExpen.Name = "lbExpen";
+            this.lbExpen.Size = new System.Drawing.Size(93, 12);
+            this.lbExpen.TabIndex = 40;
+            this.lbExpen.Text = "オークション諸経費";
+            // 
+            // lbWinning
+            // 
+            this.lbWinning.AutoSize = true;
+            this.lbWinning.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lbWinning.Location = new System.Drawing.Point(142, 52);
+            this.lbWinning.Name = "lbWinning";
+            this.lbWinning.Size = new System.Drawing.Size(53, 12);
+            this.lbWinning.TabIndex = 39;
+            this.lbWinning.Text = "落札価格";
+            // 
+            // lbSum
+            // 
+            this.lbSum.AutoSize = true;
+            this.lbSum.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lbSum.Location = new System.Drawing.Point(142, 128);
+            this.lbSum.Name = "lbSum";
+            this.lbSum.Size = new System.Drawing.Size(53, 12);
+            this.lbSum.TabIndex = 43;
+            this.lbSum.Text = "合計金額";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label18.Location = new System.Drawing.Point(6, 128);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(53, 12);
+            this.label18.TabIndex = 42;
+            this.label18.Text = "合計金額";
+            // 
             // OrderInformationConfirmationScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(281, 395);
+            this.ClientSize = new System.Drawing.Size(696, 395);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lb_rep);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.bt_ok);
@@ -301,6 +422,8 @@
             this.Name = "OrderInformationConfirmationScreen";
             this.Text = "依頼情報確認";
             this.Load += new System.EventHandler(this.OrderInformationConfirmationScreen_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -328,5 +451,15 @@
         private System.Windows.Forms.Button bt_ok;
         private System.Windows.Forms.Label lb_rep;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lbSum;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label lbBuy;
+        private System.Windows.Forms.Label lbExpen;
+        private System.Windows.Forms.Label lbWinning;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
     }
 }
