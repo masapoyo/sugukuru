@@ -51,9 +51,9 @@ CREATE TABLE t_credits (
     FOREIGN KEY (id) REFERENCES m_customers(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-#T買注文テーブル
+#T買注文テーブル（受注）
 CREATE TABLE t_orders (
-    no INT NOT NULL AUTO_INCREMENT, #連番(ID)
+    no INT NOT NULL AUTO_INCREMENT, #連番
     customer INT NOT NULL,  #顧客ID - r顧客
     rep CHAR(8),    #営業担当者 - r社員
     car_name VARCHAR(512),  #車両名
@@ -72,3 +72,24 @@ CREATE TABLE t_orders (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #T納品テーブル
+CREATE TABLE t_deliverables (
+    no INT NOT NULL AUTO_INCREMENT, #連番
+    customer INT NOT NULL,  #顧客ID
+    printed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, #発行日
+    PRIMARY KEY(no), 
+    INDEX(no),
+    FOREIGN KEY (customer) REFERENCES m_customers(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#T納品-受注テーブル
+CREATE TABLE t_ordered_delivered (
+    id INT NOT NULL AUTO_INCREMENT, #ID
+    order_no INT NOT NULL, #受注no
+    deliverable_no INT NOT NULL, #納品no
+    PRIMARY KEY(id), 
+    INDEX(id),
+    FOREIGN KEY (order_no) REFERENCES t_orders(no), 
+    FOREIGN KEY (deliverable_no) REFERENCES t_deliverables(no)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#終了
