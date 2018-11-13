@@ -113,8 +113,10 @@ CREATE TABLE t_bills (
 #T請求-納品テーブル
 CREATE TABLE t_billed_delivered (
     no INT NOT NULL AUTO_INCREMENT, #no
-    bill_no INT NOT NULL,   #請求No
     deliverable_no INT NOT NULL,    #納品No
+    bill_no INT NOT NULL,   #請求No
+    FOREIGN KEY (deliverable_no) REFERENCES t_deliverables(no),
+    FOREIGN KEY (bill_no) REFERENCES t_bills(no)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #終了
