@@ -1,4 +1,5 @@
 #IH31 スグクル社 車両販売管理システム データベース
+#作成開始
 DROP DATABASE IF EXISTS sugukuru;
 CREATE DATABASE sugukuru CHARACTER SET utf8;
 use sugukuru;
@@ -43,16 +44,6 @@ CREATE TABLE m_employees (
     INDEX(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/* #T与信テーブル
-CREATE TABLE t_credits (
-    no INT NOT NULL AUTO_INCREMENT,  #No
-    id INT(8) NOT NULL, #顧客ID -r顧客
-    
-    PRIMARY KEY(no, id), 
-    INDEX(no, id), 
-    FOREIGN KEY (id) REFERENCES m_customers(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; */
-
 #T買注文テーブル（受注）
 CREATE TABLE t_orders (
     no INT NOT NULL AUTO_INCREMENT, #連番
@@ -73,7 +64,7 @@ CREATE TABLE t_orders (
     commision DECIMAL(13, 0) DEFAULT NULL,  #買手数料
     PRIMARY KEY(no), 
     INDEX(no), 
-    FOREIGN KEY (customer) REFERENCES m_customers(id),
+    FOREIGN KEY (customer) REFERENCES t_customers(id),
     FOREIGN KEY (rep) REFERENCES m_employees(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -84,7 +75,7 @@ CREATE TABLE t_deliverables (
     printed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, #発行日
     PRIMARY KEY(no), 
     INDEX(no),
-    FOREIGN KEY (customer) REFERENCES m_customers(id)
+    FOREIGN KEY (customer) REFERENCES t_customers(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #T納品-受注テーブル
@@ -98,16 +89,13 @@ CREATE TABLE t_ordered_delivered (
     FOREIGN KEY (deliverable_no) REFERENCES t_deliverables(no)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/* #繰り越し分
-CREATE TABLE t_carry_over (
-    
-) ENGINE=InnoDB DEFAULT CHARSET=utf8; */
-
 #T請求テーブル
 CREATE TABLE t_bills (
     no INT NOT NULL AUTO_INCREMENT, #no
     printed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, #発行日
     cleared BOOLEAN NOT NULL DEFAULT FALSE, #請求消込
+    PRIMARY KEY(no), 
+    INDEX(no)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #T請求-納品テーブル
@@ -115,6 +103,8 @@ CREATE TABLE t_billed_delivered (
     no INT NOT NULL AUTO_INCREMENT, #no
     deliverable_no INT NOT NULL,    #納品No
     bill_no INT NOT NULL,   #請求No
+    PRIMARY KEY(no), 
+    INDEX(no),
     FOREIGN KEY (deliverable_no) REFERENCES t_deliverables(no),
     FOREIGN KEY (bill_no) REFERENCES t_bills(no)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
