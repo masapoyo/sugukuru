@@ -16,10 +16,5 @@ namespace IHWork
         {
             InitializeComponent();
         }
-
-        private void btLogin_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
