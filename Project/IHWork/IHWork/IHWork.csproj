@@ -88,6 +88,12 @@
     <Compile Include="OrderInformationConfirmationScreen.Designer.cs">
       <DependentUpon>OrderInformationConfirmationScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="paymentReference.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="paymentReference.Designer.cs">
+      <DependentUpon>paymentReference.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseRemainingInformationList.cs">
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OrderInformationConfirmationScreen.resx">
       <DependentUpon>OrderInformationConfirmationScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="paymentReference.resx">
+      <DependentUpon>paymentReference.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

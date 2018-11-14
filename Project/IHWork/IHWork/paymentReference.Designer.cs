@@ -30,7 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.btReference = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.oFDReference = new System.Windows.Forms.OpenFileDialog();
             this.tbReference = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -54,10 +54,12 @@
             this.btReference.TabIndex = 1;
             this.btReference.Text = "参照";
             this.btReference.UseVisualStyleBackColor = true;
+            this.btReference.Click += new System.EventHandler(this.btReference_Click);
             // 
-            // openFileDialog1
+            // oFDReference
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.oFDReference.FileName = "openFileDialog1";
+            this.oFDReference.FileOk += new System.ComponentModel.CancelEventHandler(this.oFDReference_FileOk);
             // 
             // tbReference
             // 
@@ -97,7 +99,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btReference;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog oFDReference;
         private System.Windows.Forms.TextBox tbReference;
         private System.Windows.Forms.Button button1;
     }

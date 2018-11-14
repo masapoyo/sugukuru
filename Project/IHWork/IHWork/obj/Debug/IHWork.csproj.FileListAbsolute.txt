@@ -33,3 +33,4 @@ C:\Users\masap\Documents\sugukuru\Project\IHWork\IHWork\obj\Debug\IHWork.csproj.
 C:\Users\masap\Documents\sugukuru\Project\IHWork\IHWork\obj\Debug\IHWork.csproj.CoreCompileInputs.cache
 C:\Users\masap\Documents\sugukuru\Project\IHWork\IHWork\obj\Debug\IHWork.exe
 C:\Users\masap\Documents\sugukuru\Project\IHWork\IHWork\obj\Debug\IHWork.pdb
+C:\Users\masap\Documents\sugukuru\Project\IHWork\IHWork\obj\Debug\IHWork.paymentReference.resources
