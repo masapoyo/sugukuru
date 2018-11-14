@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clearConpletion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="clearConpletion.Designer.cs">
+      <DependentUpon>clearConpletion.cs</DependentUpon>
+    </Compile>
     <Compile Include="customerInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,6 +62,12 @@
     </Compile>
     <Compile Include="customerList.Designer.cs">
       <DependentUpon>customerList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="deliveryList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="deliveryList.Designer.cs">
+      <DependentUpon>deliveryList.cs</DependentUpon>
     </Compile>
     <Compile Include="login.cs">
       <SubType>Form</SubType>
@@ -82,6 +94,18 @@
     <Compile Include="OrderInformationConfirmationScreen.Designer.cs">
       <DependentUpon>OrderInformationConfirmationScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="paymentListAndInvoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="paymentListAndInvoice.Designer.cs">
+      <DependentUpon>paymentListAndInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="paymentReference.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="paymentReference.Designer.cs">
+      <DependentUpon>paymentReference.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseRemainingInformationList.cs">
@@ -102,11 +126,17 @@
     <Compile Include="VehicleSearch.Designer.cs">
       <DependentUpon>VehicleSearch.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="clearConpletion.resx">
+      <DependentUpon>clearConpletion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="customerInfo.resx">
       <DependentUpon>customerInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="customerList.resx">
       <DependentUpon>customerList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="deliveryList.resx">
+      <DependentUpon>deliveryList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="login.resx">
       <DependentUpon>login.cs</DependentUpon>
@@ -119,6 +149,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OrderInformationConfirmationScreen.resx">
       <DependentUpon>OrderInformationConfirmationScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="paymentListAndInvoice.resx">
+      <DependentUpon>paymentListAndInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="paymentReference.resx">
+      <DependentUpon>paymentReference.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

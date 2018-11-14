@@ -17,6 +17,7 @@ INSERT INTO m_our_company (
 
 /*社員情報*/
 INSERT INTO m_employees (
+    id,
     phonetic,
     name,
     password,
@@ -31,6 +32,7 @@ INSERT INTO m_employees (
     "1997-12-09"
 );
 INSERT INTO m_employees (
+    id,
     phonetic,
     name,
     password,
@@ -45,6 +47,7 @@ INSERT INTO m_employees (
     "1997-06-30"
 );
 INSERT INTO m_employees (
+    id,
     phonetic,
     name,
     password,
@@ -59,6 +62,7 @@ INSERT INTO m_employees (
     "1997-09-04"
 );
 INSERT INTO m_employees (
+    id,
     phonetic,
     name,
     password,
@@ -73,6 +77,7 @@ INSERT INTO m_employees (
     "1997-10-07"
 );
 INSERT INTO m_employees (
+    id,
     phonetic,
     name,
     password,
@@ -85,7 +90,9 @@ INSERT INTO m_employees (
     "aaaaaaaa",
     0,
     "1997-03-25"
-);INSERT INTO m_employees (
+);
+INSERT INTO m_employees (
+    id,
     phonetic,
     name,
     password,
@@ -100,6 +107,7 @@ INSERT INTO m_employees (
     "1997-06-30"
 );
 INSERT INTO m_employees (
+    id,
     phonetic,
     name,
     password,
@@ -114,6 +122,7 @@ INSERT INTO m_employees (
     "1997-04-05"
 );
 INSERT INTO m_employees (
+    id,
     phonetic,
     name,
     password,
@@ -128,6 +137,7 @@ INSERT INTO m_employees (
     "1997-10-14"
 );
 INSERT INTO m_employees (
+    id,
     phonetic,
     name,
     password,
@@ -142,6 +152,7 @@ INSERT INTO m_employees (
     "1997-011-05"
 );
 INSERT INTO m_employees (
+    id,
     phonetic,
     name,
     password,
