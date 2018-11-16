@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace IHWork
 {
-    public partial class OrderCheck : Form
+    public partial class Form1 : Form
     {
-        public OrderCheck()
+        public Form1()
         {
             InitializeComponent();
-        }
-
-        private void OrderCheck_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
