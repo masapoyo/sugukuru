@@ -167,3 +167,49 @@ INSERT INTO m_employees (
     "1997-04-21"
 );
 
+/*顧客情報*/
+INSERT INTO t_customers (
+    phonetic,
+    name,
+    zip_code,
+    address,
+    phone,
+    fax
+) VALUES (
+    "ｶﾌﾞｼｷｶﾞｲｼｬｱｼｽﾄ",
+    "株式会社アシスト",
+    "152-0003",
+    "東京都目黒区碑文谷6-7-1",
+    "03-6712-2013",
+    "03-6712-2015"
+);
+INSERT INTO t_customers (
+    phonetic,
+    name,
+    zip_code,
+    address,
+    phone,
+    fax
+) VALUES (
+    "ｶﾌﾞｼｷｶﾞｲｼｬﾌﾟﾛﾀﾞｸｼｮﾝｵｷﾞ",
+    "株式会社プロダクション尾木",
+    "104-0061",
+    "東京都中央区銀座四丁目3-6",
+    "03-6263-0541",
+    "03-6263-0551"
+);
+INSERT INTO t_customers (
+    phonetic,
+    name,
+    zip_code,
+    address,
+    phone,
+    fax
+) VALUES (
+    "ｶﾌﾞｼｷｶﾞｲｼｬﾘｼｪ",
+    "株式会社リシェ",
+    "153-0043",
+    "東京都目黒区東山1丁目8番11号 タウンハウス中目黒203",
+    "03-6303-3853",
+    "03-6745-1743"
+);
