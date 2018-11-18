@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Customers.cs" />
+    <Compile Include="Deliverables.cs" />
     <Compile Include="Employees.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
