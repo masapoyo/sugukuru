@@ -17,6 +17,18 @@ CREATE TABLE m_our_company (
     INDEX(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+#M社員テーブル
+CREATE TABLE m_employees (
+    id CHAR(8) NOT NULL, #社員ID
+    phonetic VARCHAR(512),   #フリガナ
+    name VARCHAR(256) NOT NULL,   #社員名
+    password VARCHAR(128),   #パスワード
+    gender BOOLEAN, #性別
+    birthday DATE,   #生年月日
+    PRIMARY KEY(id), 
+    INDEX(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 #T顧客テーブル
 CREATE TABLE t_customers (
     id INT(8) NOT NULL AUTO_INCREMENT,    #顧客ID
@@ -28,18 +40,6 @@ CREATE TABLE t_customers (
     fax CHAR(12),    #FAX番号
     credit_limit DECIMAL(13, 0) NOT NULL DEFAULT 20000000,  #与信限度額
     carry_over DECIMAL(13, 0) DEFAULT 0,    #繰り越し分
-    PRIMARY KEY(id), 
-    INDEX(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-#M社員テーブル
-CREATE TABLE m_employees (
-    id CHAR(8) NOT NULL, #社員ID
-    phonetic VARCHAR(512),   #フリガナ
-    name VARCHAR(256) NOT NULL,   #社員名
-    password VARCHAR(128),   #パスワード
-    gender BOOLEAN, #性別
-    birthday DATE,   #生年月日
     PRIMARY KEY(id), 
     INDEX(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
