@@ -167,6 +167,15 @@ public Boolean isCleared() {
     return this._cleared;
 }
 //落札価格
+public int getContracted() {
+    return this._contracted;
+}
 //オークション諸経費
+public int getExpenses() {
+    return this._expenses;
+}
 //買手数料
+public int getCommision() {
+    return this._commision;
+}
 /*-------------------------------------------------*/

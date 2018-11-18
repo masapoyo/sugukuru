@@ -11,12 +11,12 @@ namespace Entities
     {
         /*フィールド*/
         /*-------------------------------------------------*/
-        private String _id; //社員ID
-        private String _phonetic; //フリガナ
-        private String _name; //社員名
-        private String _passwrod; //パスワード
-        private String _gender; //性別
-        private String _birthday; //生年月日
+        private string _id; //社員ID
+        private string _phonetic; //フリガナ
+        private string _name; //社員名
+        private string _passwrod; //パスワード
+        private string _gender; //性別
+        private string _birthday; //生年月日
         /*-------------------------------------------------*/
 
         /*コンストラクタ*/
@@ -35,22 +35,22 @@ namespace Entities
         /*セッター*/
         /*-------------------------------------------------*/
         //社員ID
-        public void setId(String id)
+        public void setId(string id)
         {
             this._id = id;
         }
         //フリガナ
-        public void setPhonetic(String phonetic)
+        public void setPhonetic(string phonetic)
         {
             this._phonetic = phonetic;
         }
         //社員名
-        public void setName(String name)
+        public void setName(string name)
         {
             this._name = name;
         }
         //パスワード
-        public void setPassword(String password)
+        public void setPassword(string password)
         {
             this._passwrod = password;
         }
@@ -64,7 +64,7 @@ namespace Entities
             }
         }
         //生年月日
-        public void setBirthday(String birthday)
+        public void setBirthday(string birthday)
         {
             this._birthday = birthday;
         }
@@ -73,32 +73,32 @@ namespace Entities
         /*ゲッター*/
         /*-------------------------------------------------*/
         //社員ID
-        public String getId()
+        public string getId()
         {
             return this._id;
         }
         //フリガナ
-        public String getPhonetic()
+        public string getPhonetic()
         {
             return this._phonetic;
         }
         //社員名
-        public String getName()
+        public string getName()
         {
             return this._name;
         }
         //パスワード
-        public String getPassword()
+        public string getPassword()
         {
             return this._passwrod;
         }
         //性別
-        public String getGender()
+        public string getGender()
         {
             return this._gender;
         }
         //生年月日
-        public String getBirthday()
+        public string getBirthday()
         {
             return this._birthday;
         }
