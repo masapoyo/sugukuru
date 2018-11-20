@@ -48,6 +48,8 @@
     <Compile Include=".Designer.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Entities\BilledDelivered.cs" />
+    <Compile Include="Entities\Bills.cs" />
     <Compile Include="clearConpletion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,12 +68,15 @@
     <Compile Include="customerList.Designer.cs">
       <DependentUpon>customerList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Customers.cs" />
+    <Compile Include="Entities\Deliverables.cs" />
     <Compile Include="deliveryList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="deliveryList.Designer.cs">
       <DependentUpon>deliveryList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Employees.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +95,7 @@
     <Compile Include="OrderCheck.Designer.cs">
       <DependentUpon>OrderCheck.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\OrderdDelivered.cs" />
     <Compile Include="OrderFormat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +105,8 @@
     <Compile Include="OrderInformationConfirmationScreen.Designer.cs">
       <DependentUpon>OrderInformationConfirmationScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Orders.cs" />
+    <Compile Include="Entities\OurCompany.cs" />
     <Compile Include="paymentListAndInvoice.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,5 +200,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

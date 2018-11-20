@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.gbDepositList = new System.Windows.Forms.GroupBox();
-            this.gbInvoiceList = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.dGVDepositList = new System.Windows.Forms.DataGridView();
+            this.gbInvoiceList = new System.Windows.Forms.GroupBox();
             this.dGVInvoiceList = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
             this.btCleaning = new System.Windows.Forms.Button();
             this.gbDepositList.SuspendLayout();
-            this.gbInvoiceList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGVDepositList)).BeginInit();
+            this.gbInvoiceList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGVInvoiceList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,6 +51,15 @@
             this.gbDepositList.TabStop = false;
             this.gbDepositList.Text = "入金一覧";
             // 
+            // dGVDepositList
+            // 
+            this.dGVDepositList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGVDepositList.Location = new System.Drawing.Point(6, 26);
+            this.dGVDepositList.Name = "dGVDepositList";
+            this.dGVDepositList.RowTemplate.Height = 21;
+            this.dGVDepositList.Size = new System.Drawing.Size(531, 265);
+            this.dGVDepositList.TabIndex = 0;
+            // 
             // gbInvoiceList
             // 
             this.gbInvoiceList.Controls.Add(this.dGVInvoiceList);
@@ -62,6 +71,15 @@
             this.gbInvoiceList.TabStop = false;
             this.gbInvoiceList.Text = "請求一覧";
             // 
+            // dGVInvoiceList
+            // 
+            this.dGVInvoiceList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGVInvoiceList.Location = new System.Drawing.Point(6, 26);
+            this.dGVInvoiceList.Name = "dGVInvoiceList";
+            this.dGVInvoiceList.RowTemplate.Height = 21;
+            this.dGVInvoiceList.Size = new System.Drawing.Size(531, 288);
+            this.dGVInvoiceList.TabIndex = 0;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -71,24 +89,6 @@
             this.label1.Size = new System.Drawing.Size(120, 27);
             this.label1.TabIndex = 2;
             this.label1.Text = "入金照合";
-            // 
-            // dGVDepositList
-            // 
-            this.dGVDepositList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dGVDepositList.Location = new System.Drawing.Point(6, 26);
-            this.dGVDepositList.Name = "dGVDepositList";
-            this.dGVDepositList.RowTemplate.Height = 21;
-            this.dGVDepositList.Size = new System.Drawing.Size(531, 265);
-            this.dGVDepositList.TabIndex = 0;
-            // 
-            // dGVInvoiceList
-            // 
-            this.dGVInvoiceList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dGVInvoiceList.Location = new System.Drawing.Point(6, 26);
-            this.dGVInvoiceList.Name = "dGVInvoiceList";
-            this.dGVInvoiceList.RowTemplate.Height = 21;
-            this.dGVInvoiceList.Size = new System.Drawing.Size(531, 288);
-            this.dGVInvoiceList.TabIndex = 0;
             // 
             // btCleaning
             // 
@@ -111,9 +111,10 @@
             this.Controls.Add(this.label1);
             this.Name = "paymentListAndInvoice";
             this.Text = "paymentListAndInvoice";
+            this.Load += new System.EventHandler(this.paymentListAndInvoice_Load);
             this.gbDepositList.ResumeLayout(false);
-            this.gbInvoiceList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dGVDepositList)).EndInit();
+            this.gbInvoiceList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dGVInvoiceList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
