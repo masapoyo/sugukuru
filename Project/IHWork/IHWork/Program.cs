@@ -16,7 +16,7 @@ namespace IHWork
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new paymentReference());
+            Application.Run(new customerList());
         }
     }
 }

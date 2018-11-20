@@ -1,4 +1,4 @@
-/*自社情報*/
+﻿/*自社情報*/
 INSERT INTO m_our_company (
     phonetic,
     name,
@@ -213,3 +213,5 @@ INSERT INTO t_customers (
     "03-6303-3853",
     "03-6745-1743"
 );
+
+
