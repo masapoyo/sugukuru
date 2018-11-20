@@ -82,6 +82,14 @@
     <Compile Include="deliveryList.Designer.cs">
       <DependentUpon>deliveryList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\BilledDelivered.cs" />
+    <Compile Include="Entities\Bills.cs" />
+    <Compile Include="Entities\Customers.cs" />
+    <Compile Include="Entities\Deliverables.cs" />
+    <Compile Include="Entities\Employees.cs" />
+    <Compile Include="Entities\OrderdDelivered.cs" />
+    <Compile Include="Entities\Orders.cs" />
+    <Compile Include="Entities\OurCompany.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
