@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BilledDelivered.cs" />
+    <Compile Include="Bills.cs" />
     <Compile Include="Customers.cs" />
     <Compile Include="Deliverables.cs" />
     <Compile Include="Employees.cs" />
@@ -53,6 +55,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="OrderdDelivered.cs" />
     <Compile Include="Orders.cs" />
     <Compile Include="OurCompany.cs" />
     <Compile Include="Program.cs" />
