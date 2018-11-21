@@ -20,10 +20,18 @@ namespace IHWork
         private ArrayList _bank;
         private paymentReference pr;
 
+        //データベース接続文字列格納用変数
+        string ConStr;
+
+        //SQL文格納用変数
+        string sql;
+
         public paymentListAndInvoice()
         {
             this._bank = new ArrayList();
             this.pr = new paymentReference();
+            this.ConStr = ConfigurationManager.AppSettings["DbConKey"];
+            this.sql = "";
             InitializeComponent();
         }
 
@@ -40,6 +48,9 @@ namespace IHWork
             string transferer = "";
             string transferMoney = "";
             string transferDate = "";
+
+            //v_biilsからデータ抽出
+            this.sql = "SELECT * FROM v_bills;";
 
             //カラム数を指定
             dGVDepositList.ColumnCount = 3;
@@ -70,4 +81,7 @@ namespace IHWork
             }
         }
     }
+
+    //データベースからデータ抽出するクラス
+    
 }
