@@ -38,7 +38,16 @@ namespace IHWork
                 catch
                 {
                     MessageBox.Show("ユーザー名もしくはパスワードが正しくありません ", "OK");
+                    return;
                 }
+
+                customerList cL = new customerList();
+                this.Hide();
+                cL.ShowDialog();
+                this.Close();
+                //オブジェクトが閉じたら
+                cL.Dispose();
+                
             }
             else
             {
