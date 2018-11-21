@@ -7,19 +7,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Entities;
 
 namespace IHWork
 {
     public partial class login : Form
     {
-        private String _dbCnctStr;   // DB接続文字列を格納するフィールド。
-        MySqlConnection _cnct;
-
+        IHWork.MySqlConnections cnct;
+        Employees emp;
         public login()
         {
             InitializeComponent();
         }
 
-        
+        private void btLogin_Click(object sender, EventArgs e)
+        {
+            cnct = new MySqlConnections();
+            emp = new Employees();
+            //入力値チェック
+            if (!"".Equals(tbUserId.Text.ToString()) && !"".Equals(tbPassword.Text.ToString()))
+            {
+                try
+                {
+                    //テキスト取得    
+                    String id = tbUserId.Text.ToString();
+                    String pass = tbPassword.Text.ToString();
+                    emp = this.cnct.CheckLogin(id, pass);
+                    MessageBox.Show("ログイン完了 " + emp.getName(), "OK");
+                }
+                catch
+                {
+                    MessageBox.Show("ユーザー名もしくはパスワードが正しくありません ", "OK");
+                }
+            }
+            else
+            {
+                MessageBox.Show( "ユーザー名もしくはパスワードが入力されていません", "エラー");
+                return;
+            }
+            
+        }
     }
 }
