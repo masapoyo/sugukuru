@@ -24,15 +24,15 @@ namespace IHWork
         string ConStr;
 
         //SQL文格納用変数
-        string sql;
+        string _sql;
 
         public paymentListAndInvoice()
         {
+            InitializeComponent();
             this._bank = new ArrayList();
             this.pr = new paymentReference();
             this.ConStr = ConfigurationManager.AppSettings["DbConKey"];
-            this.sql = "";
-            InitializeComponent();
+            this._sql = "";
         }
 
         //値受け取り用処理メソッド
@@ -48,10 +48,7 @@ namespace IHWork
             string transferer = "";
             string transferMoney = "";
             string transferDate = "";
-
-            //v_biilsからデータ抽出
-            this.sql = "SELECT * FROM v_bills;";
-
+            
             //カラム数を指定
             dGVDepositList.ColumnCount = 3;
 
@@ -60,10 +57,16 @@ namespace IHWork
             dGVDepositList.Columns[1].HeaderText = "金額";
             dGVDepositList.Columns[2].HeaderText = "勘定日";
 
+            for(int i = 0; i < dGVDepositList.ColumnCount; i++)
+            {
+                dGVDepositList.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
             //*** DataGridView PROPERTY設定
             dGVDepositList.MultiSelect = false;
             dGVDepositList.ReadOnly = true;
             dGVDepositList.RowHeadersVisible = false;
+            dGVDepositList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             //遷移元から送られてきた配列を表示（一行目はヘッダーレコードのためスキップ）
             for (int i = 1; i < this._bank.Count; i++)
@@ -79,9 +82,46 @@ namespace IHWork
                 //データを追加
                 dGVDepositList.Rows.Add(transferer, transferMoney, transferDate);
             }
+
+            //v_biilsからデータ抽出
+            this._sql = "SELECT customer, price, carry_over, printed_at FROM v_bills;";
+            dbSelectData(this._sql);
+        }
+
+        //データベースからデータ抽出するクラス
+        private void dbSelectData(string sql)
+        {
+            //抽出データを格納するデータセット作成
+            DataSet dSet = new DataSet("v_bills");
+
+            //データベース接続オブジェクト作成
+            MySqlConnection con = new MySqlConnection(this.ConStr);
+
+            //データベース接続
+            con.Open();
+
+            //データアダプタ生成
+            MySqlDataAdapter mAdp = new MySqlDataAdapter(sql, con);
+
+            //データ抽出＆取得
+            mAdp.Fill(dSet, "v_bills");
+
+            //データベース切断
+            con.Close();
+
+            //データテーブルとDataGridViewの関連付け
+            dGVInvoiceList.DataSource = dSet.Tables["v_bills"];
+            
+            //カラム名を指定
+            dGVInvoiceList.Columns[0].HeaderText = "顧客名";
+            dGVInvoiceList.Columns[1].HeaderText = "請求金額";
+            dGVInvoiceList.Columns[2].HeaderText = "うち繰越金額";
+            dGVInvoiceList.Columns[3].HeaderText = "請求書発行日";
+
+            //抽出件数チェック
+            int cnt = dSet.Tables["v_bills"].Rows.Count;
+            
         }
     }
-
-    //データベースからデータ抽出するクラス
     
 }
