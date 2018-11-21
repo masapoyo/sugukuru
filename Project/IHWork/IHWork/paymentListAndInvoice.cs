@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
+using MySql.Data.MySqlClient;
 
 namespace IHWork
 {
@@ -47,6 +49,11 @@ namespace IHWork
             dGVDepositList.Columns[1].HeaderText = "金額";
             dGVDepositList.Columns[2].HeaderText = "勘定日";
 
+            //*** DataGridView PROPERTY設定
+            dGVDepositList.MultiSelect = false;
+            dGVDepositList.ReadOnly = true;
+            dGVDepositList.RowHeadersVisible = false;
+
             //遷移元から送られてきた配列を表示（一行目はヘッダーレコードのためスキップ）
             for (int i = 1; i < this._bank.Count; i++)
             {
@@ -54,7 +61,6 @@ namespace IHWork
 
                 //配列の中身の一部を取り出し
                 bankData = this._bank[i].ToString();
-                bankData = bankData.Substring(0, 96);
                 transferDate = bankData.Substring(7, 6); //勘定日
                 transferMoney = bankData.Substring(19, 10); //金額
                 transferer = bankData.Substring(49); //振込依頼人
