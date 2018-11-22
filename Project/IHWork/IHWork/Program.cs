@@ -9,14 +9,14 @@ namespace IHWork
     static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// 起動画面の設定
         /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new paymentReference());
+            Application.Run(new customerList());
         }
     }
 }

@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entities;
+using MySql.Data.MySqlClient;
 
 namespace IHWork
 {
     public partial class login : Form
     {
-        IHWork.MySqlConnections cnct;
+        MySqlConnection cnct;
         Employees emp;
         public login()
         {
@@ -22,7 +23,7 @@ namespace IHWork
 
         private void btLogin_Click(object sender, EventArgs e)
         {
-            cnct = new MySqlConnections();
+            cnct = new MySqlConnection();
             emp = new Employees();
             //入力値チェック
             if (!"".Equals(tbUserId.Text.ToString()) && !"".Equals(tbPassword.Text.ToString()))
@@ -32,7 +33,7 @@ namespace IHWork
                     //テキスト取得    
                     String id = tbUserId.Text.ToString();
                     String pass = tbPassword.Text.ToString();
-                    emp = this.cnct.CheckLogin(id, pass);
+                    //emp = this.cnct.CheckLogin(id, pass);
                     MessageBox.Show("ログイン完了 " + emp.getName(), "OK");
                 }
                 catch
