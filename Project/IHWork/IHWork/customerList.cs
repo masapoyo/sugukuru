@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Entities;
 
 namespace IHWork
 {
@@ -19,6 +20,7 @@ namespace IHWork
         private String _dbCnctStr;
         private MySqlConnection _cnct;
         private String _customerName;
+        private List<Customers> _list;
 
         public customerList()
         {
@@ -46,22 +48,27 @@ namespace IHWork
 
                 MySqlDataAdapter mAdp = new MySqlDataAdapter(sql, _cnct);
                 mAdp.Fill(dsCustomers, "t_customers");
+                _list = new List<Customers>();
 
-                //エンティティに入れる NOT DATAGRID
-                dgvCustomersList.DataSource = dsCustomers.Tables["t_customers"];
+                //エンティティに入れる
 
-                /*
-                dgvCustomersList.Columns[1].HeaderText = this._customerPhonetic;
-                dgvCustomersList.Columns[2].HeaderText485455415554144154455
-                4
-                ]= this._customerName;
-                dgvCustomersList.Columns[2].HeaderText = this._customerZipCode;
-                dgvCustomersList.Columns[3].HeaderText = this._customerAddress;
-                dgvCustomersList.Columns[4].HeaderText = this._customerPhone;
-                dgvCustomersList.Columns[5].HeaderText = this._customerFax;
-                dgvCustomersList.Columns[6].HeaderText = this._customerCreditLimit;
-                dgvCustomersList.Columns[7].HeaderText = this._customerCarryOver;
-                */
+                for (int i = 0; i < dsCustomers.Tables["t_customers"].Rows.Count; i++)
+                {
+                    Customers c = new Customers();
+
+                    c.setId(dsCustomers.Tables["t_customers"].Rows[i]["id"].ToString());
+                    c.setPhonetic(dsCustomers.Tables["t_customers"].Rows[i]["phonetic"].ToString());
+                    c.setName(dsCustomers.Tables["t_customers"].Rows[i]["name"].ToString());
+                    c.setZipCode(dsCustomers.Tables["t_customers"].Rows[i]["zip_code"].ToString());
+                    c.setAddress(dsCustomers.Tables["t_customers"].Rows[i]["address"].ToString());
+                    c.setPhone(dsCustomers.Tables["t_customers"].Rows[i]["phone"].ToString());
+                    c.setFax(dsCustomers.Tables["t_customers"].Rows[i]["fax"].ToString());
+                    c.setCreditLimit(dsCustomers.Tables["t_customers"].Rows[i]["credit_limit"].ToString());
+                    c.setCarryOver(dsCustomers.Tables["t_customers"].Rows[i]["carry_over"].ToString());
+
+                    dgvCustomersList.Rows.Add(c.getName());
+                    _list.Add(c);
+                }
 
             }
             catch (Exception ex)
@@ -74,6 +81,8 @@ namespace IHWork
                 this._cnct.Close();
             }
         }
+
+
     }
     
 }
