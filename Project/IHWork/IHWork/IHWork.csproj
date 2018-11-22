@@ -33,16 +33,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data, Version=8.0.11.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
-    <Reference Include="MySql.Data.EntityFramework, Version=8.0.11.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
-    <Reference Include="MySQL.Data.EntityFrameworkCore, Version=8.0.11.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
-    <Reference Include="MySQL.Data.EntityFrameworkCore.Design, Version=8.0.11.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
-    <Reference Include="MySql.Web, Version=8.0.11.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
-    <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -55,6 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include=".Designer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Entities\BilledDelivered.cs" />
+    <Compile Include="Entities\Bills.cs" />
     <Compile Include="clearConpletion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,20 +70,15 @@
     <Compile Include="customerList.Designer.cs">
       <DependentUpon>customerList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Customers.cs" />
+    <Compile Include="Entities\Deliverables.cs" />
     <Compile Include="deliveryList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="deliveryList.Designer.cs">
       <DependentUpon>deliveryList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Entities\BilledDelivered.cs" />
-    <Compile Include="Entities\Bills.cs" />
-    <Compile Include="Entities\Customers.cs" />
-    <Compile Include="Entities\Deliverables.cs" />
     <Compile Include="Entities\Employees.cs" />
-    <Compile Include="Entities\OrderdDelivered.cs" />
-    <Compile Include="Entities\Orders.cs" />
-    <Compile Include="Entities\OurCompany.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,15 +91,15 @@
     <Compile Include="login.Designer.cs">
       <DependentUpon>login.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
-=======
-    <Compile Include="MySqlConnections.cs" />
->>>>>>> origin/masa
     <Compile Include="OrderCheck.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="OrderCheck.Designer.cs">
       <DependentUpon>OrderCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\OrderdDelivered.cs" />
+    <Compile Include="OrderFormat.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="OrderInformationConfirmationScreen.cs">
       <SubType>Form</SubType>
@@ -115,6 +107,8 @@
     <Compile Include="OrderInformationConfirmationScreen.Designer.cs">
       <DependentUpon>OrderInformationConfirmationScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Orders.cs" />
+    <Compile Include="Entities\OurCompany.cs" />
     <Compile Include="paymentListAndInvoice.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +159,9 @@
     <EmbeddedResource Include="OrderCheck.resx">
       <DependentUpon>OrderCheck.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OrderFormat.resx">
+      <DependentUpon>OrderFormat.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="OrderInformationConfirmationScreen.resx">
       <DependentUpon>OrderInformationConfirmationScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -205,8 +202,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
