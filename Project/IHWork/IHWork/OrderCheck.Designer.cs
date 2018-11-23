@@ -59,7 +59,7 @@
             this.lbCommision = new System.Windows.Forms.Label();
             this.lbExpenses = new System.Windows.Forms.Label();
             this.lbContracted = new System.Windows.Forms.Label();
-            this.btEnter = new System.Windows.Forms.Button();
+            this.btSubmit = new System.Windows.Forms.Button();
             this.cbTransmission = new System.Windows.Forms.ComboBox();
             this.gbContracted.SuspendLayout();
             this.SuspendLayout();
@@ -326,15 +326,16 @@
             this.lbContracted.TabIndex = 36;
             this.lbContracted.Text = "落札価格";
             // 
-            // btEnter
+            // btSubmit
             // 
-            this.btEnter.Enabled = false;
-            this.btEnter.Location = new System.Drawing.Point(722, 449);
-            this.btEnter.Name = "btEnter";
-            this.btEnter.Size = new System.Drawing.Size(102, 40);
-            this.btEnter.TabIndex = 37;
-            this.btEnter.Text = "受注消込";
-            this.btEnter.UseVisualStyleBackColor = true;
+            this.btSubmit.Enabled = false;
+            this.btSubmit.Location = new System.Drawing.Point(722, 449);
+            this.btSubmit.Name = "btSubmit";
+            this.btSubmit.Size = new System.Drawing.Size(102, 40);
+            this.btSubmit.TabIndex = 37;
+            this.btSubmit.Text = "受注消込";
+            this.btSubmit.UseVisualStyleBackColor = true;
+            this.btSubmit.Click += new System.EventHandler(this.btSubmit_Click);
             // 
             // cbTransmission
             // 
@@ -350,7 +351,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(836, 501);
             this.Controls.Add(this.cbTransmission);
-            this.Controls.Add(this.btEnter);
+            this.Controls.Add(this.btSubmit);
             this.Controls.Add(this.gbContracted);
             this.Controls.Add(this.lbRep);
             this.Controls.Add(this.label13);
@@ -417,7 +418,7 @@
         private System.Windows.Forms.Label lbCommision;
         private System.Windows.Forms.Label lbExpenses;
         private System.Windows.Forms.Label lbContracted;
-        private System.Windows.Forms.Button btEnter;
+        private System.Windows.Forms.Button btSubmit;
         private System.Windows.Forms.ComboBox cbTransmission;
     }
 }

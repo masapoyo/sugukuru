@@ -31,6 +31,7 @@ namespace IHWork
 
         //フィールド
         private Customers _customer;
+        private Orders _order;
         private int _mode;
         
         public OrderCheck()
@@ -79,8 +80,8 @@ namespace IHWork
             //this.Size = new Size(852, 540);
             gbContracted.Enabled = false;
             btChange.Visible = false;
-            btEnter.Enabled = true;
-            btEnter.Text = "決定";
+            btSubmit.Enabled = true;
+            btSubmit.Text = "決定";
         }
 
         /// <summary>
@@ -93,8 +94,16 @@ namespace IHWork
             //this.Size = new Size(852, 540);
             gbContracted.Enabled = true;
             btChange.Visible = true;
-            btEnter.Enabled = true;
-            btEnter.Text = "受注消込";
+            btSubmit.Enabled = true;
+            btSubmit.Text = "受注消込";
+        }
+
+        /// <summary>
+        /// 決定／受注消込ボタン押下時のメソッド
+        /// </summary>
+        private void btSubmit_Click(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -108,12 +117,23 @@ namespace IHWork
         }
 
         /// <summary>
-        /// 受注／を切り替えるメソッド
+        /// 受注／仕入フェーズを切り替えるメソッド
         /// </summary>
-        /// <param name="customer"></param>
+        /// 
+        /// <param name="mode">受注フェーズ／仕入フェーズの何れか</param>
         internal void receiveMode(int mode)
         {
             this._mode = mode;
+        }
+
+        /// <summary>
+        /// 選択した顧客情報を受け取るメソッド
+        /// </summary>
+        /// 
+        /// <param name="order">選択した受注</param>
+        internal void receiveOrder(Orders order)
+        {
+            this._order = order;
         }
     }
 }
