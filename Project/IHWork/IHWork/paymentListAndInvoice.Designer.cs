@@ -99,6 +99,7 @@
             this.btCleaning.TabIndex = 3;
             this.btCleaning.Text = "消込";
             this.btCleaning.UseVisualStyleBackColor = true;
+            this.btCleaning.Click += new System.EventHandler(this.btCleaning_Click);
             // 
             // paymentListAndInvoice
             // 
