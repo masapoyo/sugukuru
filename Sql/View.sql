@@ -5,6 +5,7 @@ CREATE VIEW v_bills AS (
     SELECT 
         t_bills.no AS no, #請求No
         t_customers.id AS customer_id, #顧客ID
+        t_customers.phonetic AS phonetic, #フリガナ
         t_customers.name AS customer, #顧客名
         t_orders.no AS order_id, #受注ID
         (

@@ -178,7 +178,7 @@ namespace Entities
         {
             return this._carYear;
         }
-        //車両名
+        //型式
         public string getCarModel()
         {
             return this._carModel;
