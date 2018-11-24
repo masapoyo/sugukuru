@@ -51,6 +51,7 @@ CREATE TABLE t_orders (
     rep CHAR(8),    #営業担当者 - r社員
     car_name VARCHAR(512),  #車両名
     car_year VARCHAR(4),    #年式
+    car_model VARCHAR(512),  #型式
     car_color VARCHAR(128), #色
     car_mileage DOUBLE, #走行距離
     budget DECIMAL(13, 0),  #予算

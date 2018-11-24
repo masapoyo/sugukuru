@@ -213,3 +213,154 @@ INSERT INTO t_customers (
     "03-6303-3853",
     "03-6745-1743"
 );
+
+/*受注*/
+INSERT INTO t_orders (
+    customer,
+    rep,
+    car_name,
+    car_year,
+    car_color,
+    car_mileage,
+    budget,
+    budget_category,
+    transmission,
+    note,
+    cleared,
+    contracted,
+    expenses,
+    commision
+) VALUES (
+    1,
+    "aaaa0007",
+    "NBOX",
+    "2017",
+    "青",
+    5,
+    5000000,
+    true,
+    3,
+    "テスト受注データ",
+    false,
+    5000000,
+    400000,
+    400000
+);
+INSERT INTO t_orders (
+    customer,
+    rep,
+    car_name,
+    car_year,
+    car_color,
+    car_mileage,
+    budget,
+    budget_category,
+    transmission,
+    note,
+    cleared,
+    contracted,
+    expenses,
+    commision
+) VALUES (
+    2,
+    "aaaa0005",
+    "NBOX",
+    "2015",
+    "黒",
+    4.6,
+    6000000,
+    false,
+    2,
+    "テスト受注データ2",
+    false,
+    6000000,
+    300000,
+    200000
+);
+INSERT INTO t_orders (
+    customer,
+    rep,
+    car_name,
+    car_year,
+    car_color,
+    car_mileage,
+    budget,
+    budget_category,
+    transmission,
+    note,
+    cleared,
+    contracted,
+    expenses,
+    commision
+) VALUES (
+    3,
+    "aaaa0002",
+    "ワゴンR",
+    "2013",
+    "黒",
+    3.2,
+    5500000,
+    false,
+    0,
+    "テスト受注データ3",
+    false,
+    5500000,
+    500000,
+    400000
+);
+
+/*納品*/
+INSERT INTO t_deliverables (
+    customer
+) VALUES (
+    1
+);
+INSERT INTO t_deliverables (
+    customer
+) VALUES (
+    2
+);
+
+/*納品・受注*/
+INSERT INTO t_ordered_delivered (
+    order_no,
+    deliverable_no
+) VALUES (
+    1,
+    1
+);
+INSERT INTO t_ordered_delivered (
+    order_no,
+    deliverable_no
+) VALUES (
+    2,
+    2
+);
+
+/*請求*/
+INSERT INTO t_bills (
+    cleared
+) VALUES (
+    false
+);
+INSERT INTO t_bills (
+    cleared
+) VALUES (
+    false
+);
+
+/*請求・納品*/
+INSERT INTO t_billed_delivered (
+    deliverable_no,
+    bill_no
+) VALUES (
+    1,
+    1
+);
+INSERT INTO t_billed_delivered (
+    deliverable_no,
+    bill_no
+) VALUES (
+    2,
+    2
+);
