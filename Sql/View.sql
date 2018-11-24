@@ -15,7 +15,8 @@ CREATE VIEW v_bills AS (
             t_customers.carry_over
         ) AS price, #請求金額
         t_customers.carry_over AS carry_over, #うち繰越金額
-        t_bills.printed_at AS printed_at #発行日
+        t_bills.printed_at AS printed_at, #発行日
+        t_bills.cleared AS cleared #消込フラグ
     FROM t_orders
         INNER JOIN t_customers ON t_orders.customer = t_customers.id
         INNER JOIN t_deliverables ON t_customers.id = t_deliverables.customer
