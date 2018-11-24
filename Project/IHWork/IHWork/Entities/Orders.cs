@@ -16,6 +16,7 @@ namespace Entities
         private Employees _rep; //営業担当者(社員ID)
         private string _carName; //車両名
         private string _carYear; //年式
+        private string _carModel; //型式
         private string _carColor; //色
         private double _carMileage; //走行距離
         private int _budget; //予算
@@ -38,6 +39,7 @@ namespace Entities
             this._rep = new Employees();
             this._carName = "";
             this._carYear = "";
+            this._carModel = "";
             this._carColor = "";
             this._carMileage = 0;
             this._budget = 0;
@@ -86,6 +88,11 @@ namespace Entities
         public void setCarYear(string carYear)
         {
             this._carYear = carYear;
+        }
+        //型式
+        public void setCarModel(string carModel)
+        {
+            this._carModel = carModel;
         }
         //色
         public void setCarColor(string carColor)
@@ -170,6 +177,11 @@ namespace Entities
         public string getCarYear()
         {
             return this._carYear;
+        }
+        //車両名
+        public string getCarModel()
+        {
+            return this._carModel;
         }
         //色
         public string getCarColor()

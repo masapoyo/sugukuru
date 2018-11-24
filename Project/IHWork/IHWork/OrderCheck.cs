@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entities;
+using Mysql.Data;
 
 namespace IHWork
 {
@@ -30,9 +31,12 @@ namespace IHWork
         public const int MODIFICATION_MODE = 1;
 
         //フィールド
+        private String _dbCnctStr;   // DB接続文字列を格納するフィールド。
+        MySqlConnection _cnct;
         private Customers _customer;
         private Orders _order;
         private int _mode;
+
         
         public OrderCheck()
         {
@@ -103,6 +107,27 @@ namespace IHWork
         /// </summary>
         private void btSubmit_Click(object sender, EventArgs e)
         {
+            this._order = new Orders();
+
+            //エンティティに設定
+            this._order.setCarName(tbCarName.Text);
+            this._order.setCarYear(tbCarYear.Text);
+            //this._order.setCarModel(tbMode.Text);
+            this._order.setCarColor(tbColor.Text);
+            this._order.setCarMileage(Double.Parse(tbMileage.Text));
+            this._order.setBudget(Int32.Parse(tbBudget.Text));
+            if(rbLess.Checked)
+            {
+                this._order.setBudgetCategory(false);
+            } else if(rbNear.Checked)
+            {
+                this._order.setBudgetCategory(true);
+            }
+            //this._order.setTransmission();
+            this._order.setNote(tbNote.Text);
+            //this._order.setRep();
+
+            //データベースに挿入
 
         }
 
