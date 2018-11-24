@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace IHWork
 {
+    /*消込完了後の画面*/
     public partial class clearConpletion : Form
     {
         public clearConpletion()
@@ -17,6 +18,7 @@ namespace IHWork
             InitializeComponent();
         }
 
+        //フォームロード時
         private void clearConpletion_Load(object sender, EventArgs e)
         {
  

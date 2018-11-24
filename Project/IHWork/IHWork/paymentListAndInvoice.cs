@@ -19,12 +19,15 @@ namespace IHWork
         //テキストファイル受け取り用変数
         private ArrayList _bank;
         private paymentReference pr;
-
+        
         //データベース接続文字列格納用変数
-        string ConStr;
+        private string ConStr;
 
         //SQL文格納用変数
-        string _sql;
+        private string _sql;
+
+        //消込対象の請求データの主キーを格納する配列
+        private ArrayList _clearBills;
 
         public paymentListAndInvoice()
         {
@@ -33,6 +36,8 @@ namespace IHWork
             this.pr = new paymentReference();
             this.ConStr = ConfigurationManager.AppSettings["DbConKey"];
             this._sql = "";
+            this._clearBills = new ArrayList();
+            
         }
 
         //値受け取り用処理メソッド
@@ -46,7 +51,7 @@ namespace IHWork
         {
             string bankData = "";
             string transferer = "";
-            string transferMoney = "";
+            int transferMoney = 0;
             string transferDate = "";
             
             //カラム数を指定
@@ -61,7 +66,7 @@ namespace IHWork
             {
                 dGVDepositList.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-
+            
             //*** DataGridView PROPERTY設定
             dGVDepositList.MultiSelect = false;
             dGVDepositList.ReadOnly = true;
@@ -76,7 +81,7 @@ namespace IHWork
                 //配列の中身の一部を取り出し
                 bankData = this._bank[i].ToString();
                 transferDate = bankData.Substring(7, 6); //勘定日
-                transferMoney = bankData.Substring(19, 10); //金額
+                transferMoney = int.Parse(bankData.Substring(19, 10)); //金額
                 transferer = bankData.Substring(49); //振込依頼人
 
                 //データを追加
@@ -84,12 +89,12 @@ namespace IHWork
             }
 
             //v_biilsからデータ抽出
-            this._sql = "SELECT customer, price, carry_over, printed_at FROM v_bills;";
-            dbSelectData(this._sql);
+            this._sql = "SELECT no, customer, price, carry_over, printed_at FROM v_bills;";
+            DbSelectData(this._sql);
         }
 
         //データベースからデータ抽出するクラス
-        private void dbSelectData(string sql)
+        private void DbSelectData(string sql)
         {
             //抽出データを格納するデータセット作成
             DataSet dSet = new DataSet("v_bills");
@@ -111,16 +116,108 @@ namespace IHWork
 
             //データテーブルとDataGridViewの関連付け
             dGVInvoiceList.DataSource = dSet.Tables["v_bills"];
-            
+
+            //*** DataGridView PROPERTY設定
+            dGVInvoiceList.MultiSelect = false;
+            dGVInvoiceList.ReadOnly = true;
+            dGVInvoiceList.RowHeadersVisible = false;
+            dGVInvoiceList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
             //カラム名を指定
-            dGVInvoiceList.Columns[0].HeaderText = "顧客名";
-            dGVInvoiceList.Columns[1].HeaderText = "請求金額";
-            dGVInvoiceList.Columns[2].HeaderText = "うち繰越金額";
-            dGVInvoiceList.Columns[3].HeaderText = "請求書発行日";
+            dGVInvoiceList.Columns[0].HeaderText = "No";
+            dGVInvoiceList.Columns[1].HeaderText = "顧客名";
+            dGVInvoiceList.Columns[2].HeaderText = "請求金額";
+            dGVInvoiceList.Columns[3].HeaderText = "うち繰越金額";
+            dGVInvoiceList.Columns[4].HeaderText = "請求書発行日";
+
+            dGVInvoiceList.Columns[0].Width = 0;
 
             //抽出件数チェック
             int cnt = dSet.Tables["v_bills"].Rows.Count;
             
+            //データセットの中身を確認→InvoiceMatchDepositに顧客名、金額を送信
+            for (int i = 0; i < cnt; i++)
+            {
+                InvoiceMatchDeposit(
+                    dSet.Tables["v_bills"].Rows[i]["no"].ToString(),
+                    dSet.Tables["v_bills"].Rows[i]["customer"].ToString(),
+                    dSet.Tables["v_bills"].Rows[i]["price"].ToString(),
+                    this._bank
+                    );
+            }
+        }
+
+        //請求データと一致する入金データを検索する処理メソッド
+        private void InvoiceMatchDeposit(string no, string name, string price, ArrayList bank)
+        {
+            string bankData = "";
+            string transferer = "";
+            int transferMoney = 0;
+
+            int priceInt = int.Parse(price); //請求額
+
+            //配列の中身確認処理（一行目はヘッダーレコードのためスキップ）
+            for (int i = 1; i < bank.Count; i++)
+            {
+                //配列の中身の一部を取り出し（一レコードずつ）
+                bankData = bank[i].ToString();
+                transferMoney = int.Parse( bankData.Substring(19, 10) ); //金額
+                transferer = bankData.Substring(49); //振込依頼人
+
+                //請求データ（顧客名＋金額）と一致しているかの判断処理
+                //一致している場合：その行をグレーアウト＆一致する請求Noを配列に格納
+                if (name.Equals(transferer) && priceInt == transferMoney)
+                {
+                    //ClearProcess(no);
+                    this._clearBills.Add(no);
+                    dGVDepositList.Rows[i-1].DefaultCellStyle.BackColor = Color.Gray;
+                    break;
+                }
+                //金額が一致しない場合
+                else if(name.Equals(transferer) && !(priceInt == transferMoney ))
+                {
+                    //請求額＞入金額の場合……未払い分算出
+                    if(priceInt > transferMoney)
+                    {
+                        //未払い分算出
+                        int unpaid = priceInt - transferMoney; 
+
+                    }
+                    
+                }
+            }
+
+        }
+
+        //削除フラグを立てる処理メソッド
+        private void ClearProcess(string no)
+        {
+            this._sql = "UPDATE t_bills SET cleared = true WHERE no = " + no + ";";
+
+            //データベース接続オブジェクト作成
+            MySqlConnection con = new MySqlConnection(this.ConStr);
+
+            //データベース接続
+            con.Open();
+
+            //SQL発行準備
+            MySqlCommand cmd = new MySqlCommand(this._sql, con);
+
+            //SQL実行
+            cmd.ExecuteNonQuery();
+
+            //データベース切断
+            con.Close();
+        }
+
+        //消込ボタン押下時の処理メソッド
+        private void btCleaning_Click(object sender, EventArgs e)
+        {
+            //消込対象の請求レコードの削除フラグを立てる
+            for(int i = 0; i < this._clearBills.Count; i++)
+            {
+                ClearProcess(this._clearBills[i].ToString());
+            }
         }
     }
     
