@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entities;
-using Mysql.Data;
+using MySql.Data.MySqlClient;
 
 namespace IHWork
 {
@@ -112,7 +112,7 @@ namespace IHWork
             //エンティティに設定
             this._order.setCarName(tbCarName.Text);
             this._order.setCarYear(tbCarYear.Text);
-            //this._order.setCarModel(tbMode.Text);
+            this._order.setCarModel(tbModel.Text);
             this._order.setCarColor(tbColor.Text);
             this._order.setCarMileage(Double.Parse(tbMileage.Text));
             this._order.setBudget(Int32.Parse(tbBudget.Text));
