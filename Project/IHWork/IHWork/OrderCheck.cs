@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -31,7 +32,7 @@ namespace IHWork
         public const int MODIFICATION_MODE = 1;
 
         //フィールド
-        private String _dbCnctStr;   // DB接続文字列を格納するフィールド。
+        private readonly String _dbCnctStr;
         MySqlConnection _cnct;
         private Customers _customer;
         private Orders _order;
@@ -41,6 +42,7 @@ namespace IHWork
         public OrderCheck()
         {
             InitializeComponent();
+            this._dbCnctStr = ConfigurationManager.AppSettings["DbConKey"];
         }
 
         private void OrderCheck_Load(object sender, EventArgs e)
@@ -107,15 +109,16 @@ namespace IHWork
         /// </summary>
         private void btSubmit_Click(object sender, EventArgs e)
         {
+            this._cnct = new MySqlConnection(this._dbCnctStr);
             this._order = new Orders();
 
             //エンティティに設定
-            this._order.setCarName(tbCarName.Text);
-            this._order.setCarYear(tbCarYear.Text);
-            this._order.setCarModel(tbModel.Text);
-            this._order.setCarColor(tbColor.Text);
-            this._order.setCarMileage(Double.Parse(tbMileage.Text));
-            this._order.setBudget(Int32.Parse(tbBudget.Text));
+            this._order.setCarName(tbCarName.Text.ToString());
+            this._order.setCarYear(tbCarYear.Text.ToString());
+            this._order.setCarModel(tbModel.Text.ToString());
+            this._order.setCarColor(tbColor.Text.ToString());
+            this._order.setCarMileage(Double.Parse(tbMileage.Text.ToString()));
+            this._order.setBudget(Int32.Parse(tbBudget.Text.ToString()));
             if(rbLess.Checked)
             {
                 this._order.setBudgetCategory(false);
@@ -124,11 +127,51 @@ namespace IHWork
                 this._order.setBudgetCategory(true);
             }
             //this._order.setTransmission();
-            this._order.setNote(tbNote.Text);
+            this._order.setNote(tbNote.Text.ToString());
             //this._order.setRep();
 
+            //デバッグ用
+            this._order.setTransmission(1);
+            this._order.setRep("aaaa0001".ToString());
             //データベースに挿入
+            String sql = "INSERT INTO t_orders " +
+            "(customer, rep, car_name, car_year, car_model, car_color, car_mileage, budget, budget_category, transmission, note) " +
+            "VALUES " +
+            "(@customer, @rep, @carName, @carYear, @carModel, @carColor, @carMileage, @budget, @around, @transmission, @note)";
 
+            try
+            {
+                this._cnct.Open();
+
+                MySqlCommand cmd = new MySqlCommand(sql, this._cnct);
+
+                // インジェクション対策。
+                cmd.Parameters.Add(new MySqlParameter("customer", this._customer.getId()));
+                cmd.Parameters.Add(new MySqlParameter("rep", this._order.getRep()));
+                cmd.Parameters.Add(new MySqlParameter("carName", this._order.getCarName()));
+                cmd.Parameters.Add(new MySqlParameter("carYear", this._order.getCarYear()));
+                cmd.Parameters.Add(new MySqlParameter("carModel", this._order.getCarModel()));
+                cmd.Parameters.Add(new MySqlParameter("carColor", this._order.getCarColor()));
+                cmd.Parameters.Add(new MySqlParameter("carMileage", this._order.getCarMileage()));
+                cmd.Parameters.Add(new MySqlParameter("budget", this._order.getBudget()));
+                cmd.Parameters.Add(new MySqlParameter("around", this._order.isAround()));
+                cmd.Parameters.Add(new MySqlParameter("transmission", this._order.getTransmission()));
+                cmd.Parameters.Add(new MySqlParameter("note", this._order.getNote()));
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
+                Debug.WriteLine(Convert.ToString(ex));
+            }
+            finally
+            {
+                if (this._cnct != null)
+                {
+                    this._cnct.Close();
+                }
+            }
         }
 
         /// <summary>
