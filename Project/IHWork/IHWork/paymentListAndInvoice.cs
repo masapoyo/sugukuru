@@ -29,6 +29,9 @@ namespace IHWork
         //消込対象の請求データの主キーを格納する配列
         private ArrayList _clearBills;
 
+        //未払い分
+        private int _unpaid;
+
         public paymentListAndInvoice()
         {
             InitializeComponent();
@@ -37,7 +40,7 @@ namespace IHWork
             this.ConStr = ConfigurationManager.AppSettings["DbConKey"];
             this._sql = "";
             this._clearBills = new ArrayList();
-            
+            this._unpaid = 0;
         }
 
         //値受け取り用処理メソッド
@@ -89,7 +92,7 @@ namespace IHWork
             }
 
             //v_biilsからデータ抽出
-            this._sql = "SELECT no, customer, price, carry_over, printed_at FROM v_bills;";
+            this._sql = "SELECT no, phonetic, price, carry_over, printed_at FROM v_bills;";
             DbSelectData(this._sql);
         }
 
@@ -140,7 +143,7 @@ namespace IHWork
             {
                 InvoiceMatchDeposit(
                     dSet.Tables["v_bills"].Rows[i]["no"].ToString(),
-                    dSet.Tables["v_bills"].Rows[i]["customer"].ToString(),
+                    dSet.Tables["v_bills"].Rows[i]["phonetic"].ToString(),
                     dSet.Tables["v_bills"].Rows[i]["price"].ToString(),
                     this._bank
                     );
@@ -148,7 +151,7 @@ namespace IHWork
         }
 
         //請求データと一致する入金データを検索する処理メソッド
-        private void InvoiceMatchDeposit(string no, string name, string price, ArrayList bank)
+        private void InvoiceMatchDeposit(string no, string phonetic, string price, ArrayList bank)
         {
             string bankData = "";
             string transferer = "";
@@ -166,7 +169,7 @@ namespace IHWork
 
                 //請求データ（顧客名＋金額）と一致しているかの判断処理
                 //一致している場合：その行をグレーアウト＆一致する請求Noを配列に格納
-                if (name.Equals(transferer) && priceInt == transferMoney)
+                if (phonetic.Equals(transferer) && priceInt == transferMoney)
                 {
                     //ClearProcess(no);
                     this._clearBills.Add(no);
@@ -174,19 +177,40 @@ namespace IHWork
                     break;
                 }
                 //金額が一致しない場合
-                else if(name.Equals(transferer) && !(priceInt == transferMoney ))
+                else if(phonetic.Equals(transferer) && !(priceInt == transferMoney ))
                 {
                     //請求額＞入金額の場合……未払い分算出
                     if(priceInt > transferMoney)
                     {
                         //未払い分算出
-                        int unpaid = priceInt - transferMoney; 
+                        _unpaid = priceInt - transferMoney; 
 
                     }
                     
                 }
             }
 
+        }
+
+        //未払い分を繰り越し分として顧客テーブルに追加（あるいは更新）する処理メソッド
+        private void AtCarryOver(string no)
+        {
+            this._sql = "UPDATE t_bills SET cleared = true WHERE no = " + no + ";";
+
+            //データベース接続オブジェクト作成
+            MySqlConnection con = new MySqlConnection(this.ConStr);
+
+            //データベース接続
+            con.Open();
+
+            //SQL発行準備
+            MySqlCommand cmd = new MySqlCommand(this._sql, con);
+
+            //SQL実行
+            cmd.ExecuteNonQuery();
+
+            //データベース切断
+            con.Close();
         }
 
         //削除フラグを立てる処理メソッド
