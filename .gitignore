@@ -1,4 +1,4 @@
-# ステージ候補より除外するファイル・フォルダ一覧。
+﻿# ステージ候補より除外するファイル・フォルダ一覧。
 
 # Office一時ファイル。
 **/~$*
@@ -117,7 +117,6 @@ csx
 AppPackages/
 
 # Others
-sql/
 *.Cache
 ClientBin/
 [Ss]tyle[Cc]op.*
