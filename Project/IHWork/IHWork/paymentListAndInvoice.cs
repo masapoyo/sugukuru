@@ -29,6 +29,12 @@ namespace IHWork
         //消込対象の請求データの主キーを格納する配列
         private ArrayList _clearBills;
 
+        //未払い分格納用変数
+        private int _unpaid;
+
+        //顧客ID格納用変数
+        private string _customerId;
+
         public paymentListAndInvoice()
         {
             InitializeComponent();
@@ -37,7 +43,8 @@ namespace IHWork
             this.ConStr = ConfigurationManager.AppSettings["DbConKey"];
             this._sql = "";
             this._clearBills = new ArrayList();
-            
+            this._unpaid = 0;
+            this._customerId = "";
         }
 
         //値受け取り用処理メソッド
@@ -73,6 +80,9 @@ namespace IHWork
             dGVDepositList.RowHeadersVisible = false;
             dGVDepositList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
+            //DataGridViewの表示幅に合わせて列幅自動調整
+            dGVDepositList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            
             //遷移元から送られてきた配列を表示（一行目はヘッダーレコードのためスキップ）
             for (int i = 1; i < this._bank.Count; i++)
             {
@@ -89,7 +99,7 @@ namespace IHWork
             }
 
             //v_biilsからデータ抽出
-            this._sql = "SELECT no, customer, price, carry_over, printed_at FROM v_bills;";
+            this._sql = "SELECT no, phonetic, price, carry_over, printed_at, customer_id FROM v_bills WHERE cleared = false;";
             DbSelectData(this._sql);
         }
 
@@ -129,8 +139,13 @@ namespace IHWork
             dGVInvoiceList.Columns[2].HeaderText = "請求金額";
             dGVInvoiceList.Columns[3].HeaderText = "うち繰越金額";
             dGVInvoiceList.Columns[4].HeaderText = "請求書発行日";
+            dGVInvoiceList.Columns[5].HeaderText = "顧客ID";
+
+            //DataGridViewの表示幅に合わせて列幅自動調整
+            dGVInvoiceList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             dGVInvoiceList.Columns[0].Width = 0;
+            dGVInvoiceList.Columns[5].Width = 0;
 
             //抽出件数チェック
             int cnt = dSet.Tables["v_bills"].Rows.Count;
@@ -140,20 +155,22 @@ namespace IHWork
             {
                 InvoiceMatchDeposit(
                     dSet.Tables["v_bills"].Rows[i]["no"].ToString(),
-                    dSet.Tables["v_bills"].Rows[i]["customer"].ToString(),
+                    dSet.Tables["v_bills"].Rows[i]["phonetic"].ToString(),
                     dSet.Tables["v_bills"].Rows[i]["price"].ToString(),
+                    dSet.Tables["v_bills"].Rows[i]["customer_id"].ToString(),
                     this._bank
                     );
             }
         }
 
         //請求データと一致する入金データを検索する処理メソッド
-        private void InvoiceMatchDeposit(string no, string name, string price, ArrayList bank)
+        private void InvoiceMatchDeposit(string no, string phonetic, string price, string customerId, ArrayList bank)
         {
             string bankData = "";
             string transferer = "";
             int transferMoney = 0;
 
+            this._customerId = customerId; //顧客ID
             int priceInt = int.Parse(price); //請求額
 
             //配列の中身確認処理（一行目はヘッダーレコードのためスキップ）
@@ -166,27 +183,47 @@ namespace IHWork
 
                 //請求データ（顧客名＋金額）と一致しているかの判断処理
                 //一致している場合：その行をグレーアウト＆一致する請求Noを配列に格納
-                if (name.Equals(transferer) && priceInt == transferMoney)
+                if (phonetic.Equals(transferer) && priceInt == transferMoney)
                 {
-                    //ClearProcess(no);
                     this._clearBills.Add(no);
                     dGVDepositList.Rows[i-1].DefaultCellStyle.BackColor = Color.Gray;
                     break;
                 }
                 //金額が一致しない場合
-                else if(name.Equals(transferer) && !(priceInt == transferMoney ))
+                else if(phonetic.Equals(transferer) && priceInt != transferMoney)
                 {
                     //請求額＞入金額の場合……未払い分算出
                     if(priceInt > transferMoney)
                     {
                         //未払い分算出
-                        int unpaid = priceInt - transferMoney; 
-
+                        _unpaid = priceInt - transferMoney;
+                        AtCarryOver(this._customerId, _unpaid);
                     }
                     
                 }
             }
 
+        }
+
+        //未払い分を繰り越し分として顧客テーブルに追加（あるいは更新）する処理メソッド
+        private void AtCarryOver(string customerId, int unpaid)
+        {
+            this._sql = "UPDATE t_customers SET carry_over = " + unpaid + " WHERE id = " + customerId + ";"; 
+
+            //データベース接続オブジェクト作成
+            MySqlConnection con = new MySqlConnection(this.ConStr);
+
+            //データベース接続
+            con.Open();
+
+            //SQL発行準備
+            MySqlCommand cmd = new MySqlCommand(this._sql, con);
+
+            //SQL実行
+            cmd.ExecuteNonQuery();
+
+            //データベース切断
+            con.Close();
         }
 
         //削除フラグを立てる処理メソッド
@@ -218,6 +255,12 @@ namespace IHWork
             {
                 ClearProcess(this._clearBills[i].ToString());
             }
+
+            this.Hide();
+            clearConpletion cc = new clearConpletion();
+            cc.receiveData(this._clearBills, this._customerId);
+            cc.ShowDialog();
+            this.Dispose();
         }
     }
     
