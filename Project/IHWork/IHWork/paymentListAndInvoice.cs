@@ -80,6 +80,9 @@ namespace IHWork
             dGVDepositList.RowHeadersVisible = false;
             dGVDepositList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
+            //DataGridViewの表示幅に合わせて列幅自動調整
+            dGVDepositList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            
             //遷移元から送られてきた配列を表示（一行目はヘッダーレコードのためスキップ）
             for (int i = 1; i < this._bank.Count; i++)
             {
@@ -138,6 +141,9 @@ namespace IHWork
             dGVInvoiceList.Columns[4].HeaderText = "請求書発行日";
             dGVInvoiceList.Columns[5].HeaderText = "顧客ID";
 
+            //DataGridViewの表示幅に合わせて列幅自動調整
+            dGVInvoiceList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
             dGVInvoiceList.Columns[0].Width = 0;
             dGVInvoiceList.Columns[5].Width = 0;
 
@@ -186,7 +192,6 @@ namespace IHWork
                 //金額が一致しない場合
                 else if(phonetic.Equals(transferer) && priceInt != transferMoney)
                 {
-                    System.Diagnostics.Debug.Write("一致しない場合", transferer);
                     //請求額＞入金額の場合……未払い分算出
                     if(priceInt > transferMoney)
                     {
