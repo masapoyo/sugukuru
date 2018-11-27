@@ -163,10 +163,8 @@ namespace IHWork
         private void btPrin_Click(object sender, EventArgs e)
         {
             MySqlConnections conc = new MySqlConnections();
-            alId.Add("1");
-            alId.Add("2");
             conc.insertBills(alId);
-            
+            //画面出力
             paymentReference pr = new paymentReference();
             this.Hide();
             pr.ShowDialog();
