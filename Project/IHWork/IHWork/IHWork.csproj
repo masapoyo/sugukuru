@@ -47,9 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include=".Designer.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include=".Designer.cs" />
     <Compile Include="Entities\BilledDelivered.cs" />
     <Compile Include="Entities\Bills.cs" />
     <Compile Include="clearConpletion.cs">
@@ -98,9 +96,6 @@
       <DependentUpon>OrderCheck.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\OrderdDelivered.cs" />
-    <Compile Include="OrderFormat.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="OrderInformationConfirmationScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,9 +153,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OrderCheck.resx">
       <DependentUpon>OrderCheck.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OrderFormat.resx">
-      <DependentUpon>OrderFormat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OrderInformationConfirmationScreen.resx">
       <DependentUpon>OrderInformationConfirmationScreen.cs</DependentUpon>
