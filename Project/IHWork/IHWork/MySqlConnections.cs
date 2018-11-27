@@ -20,7 +20,7 @@ namespace IHWork
 
         public MySqlConnections()
         {
-            this.ConStr = ConfigurationManager.AppSettings["DdConKey"];
+            this.ConStr = ConfigurationManager.AppSettings["DbConKey"];
             con = new MySqlConnection(this.ConStr);
         }
 
