@@ -67,9 +67,9 @@
             // 
             this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage1.Size = new System.Drawing.Size(759, 538);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "買注残";
@@ -85,7 +85,7 @@
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5});
             this.dataGridView1.Location = new System.Drawing.Point(15, 20);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 21;
             this.dataGridView1.Size = new System.Drawing.Size(725, 504);
@@ -120,9 +120,9 @@
             // 
             this.tabPage2.Controls.Add(this.dgvOrdersList);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage2.Size = new System.Drawing.Size(759, 538);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "全体";
@@ -138,11 +138,12 @@
             this.色,
             this.変速機構の種別});
             this.dgvOrdersList.Location = new System.Drawing.Point(15, 20);
-            this.dgvOrdersList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvOrdersList.Margin = new System.Windows.Forms.Padding(4);
             this.dgvOrdersList.Name = "dgvOrdersList";
             this.dgvOrdersList.RowTemplate.Height = 21;
             this.dgvOrdersList.Size = new System.Drawing.Size(725, 504);
             this.dgvOrdersList.TabIndex = 0;
+            this.dgvOrdersList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrdersList_CellDoubleClick);
             // 
             // 車種名
             // 
@@ -174,7 +175,7 @@
             this.tabChose.Controls.Add(this.tabPage2);
             this.tabChose.Controls.Add(this.tabPage1);
             this.tabChose.Location = new System.Drawing.Point(-1, 57);
-            this.tabChose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabChose.Margin = new System.Windows.Forms.Padding(4);
             this.tabChose.Name = "tabChose";
             this.tabChose.SelectedIndex = 0;
             this.tabChose.Size = new System.Drawing.Size(767, 567);
@@ -187,7 +188,7 @@
             this.ClientSize = new System.Drawing.Size(763, 633);
             this.Controls.Add(this.tabChose);
             this.Controls.Add(this.lb_title);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PurchaseRemainingInformationList";
             this.Text = "受注一覧";
             this.Load += new System.EventHandler(this.PurchaseRemainingInformationList_Load);

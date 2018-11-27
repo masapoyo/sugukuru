@@ -37,6 +37,7 @@ namespace IHWork
         private Customers _customer;
         private Orders _order;
         private int _mode;
+        private Employees _rep;
 
         
         public OrderCheck()
@@ -55,7 +56,7 @@ namespace IHWork
             Debug.WriteLine("id: " + this._customer.getId());
 
             //デバッガーに情報の種類を表示
-            Debug.WriteLine("-----受信データ-----");
+            Debug.WriteLine("-----フェーズ-----");
             switch (this._mode)
             {
                 case INPUT_MODE:    //受注フェーズの場合
@@ -102,6 +103,9 @@ namespace IHWork
             btChange.Visible = true;
             btSubmit.Enabled = true;
             btSubmit.Text = "受注消込";
+
+            //値を引き継ぐ
+
         }
 
         /// <summary>
@@ -128,7 +132,7 @@ namespace IHWork
             }
             //this._order.setTransmission();
             this._order.setNote(tbNote.Text.ToString());
-            //this._order.setRep();
+            //this._order.receiveRep();
 
             //デバッグ用
             this._order.setTransmission(1);
@@ -195,13 +199,23 @@ namespace IHWork
         }
 
         /// <summary>
-        /// 選択した顧客情報を受け取るメソッド
+        /// 選択した受注情報を受け取るメソッド
         /// </summary>
         /// 
         /// <param name="order">選択した受注</param>
         internal void receiveOrder(Orders order)
         {
             this._order = order;
+        }
+
+        /// <summary>
+        /// 選択した受注情報の担当者を受け取るメソッド
+        /// </summary>
+        /// 
+        /// <param name="rep">担当者</param>
+        internal void receiveRep(Employees rep)
+        {
+            this._rep = rep;
         }
     }
 }
