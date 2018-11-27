@@ -150,6 +150,10 @@ namespace IHWork
         {
             MySqlConnections conc = new MySqlConnections();
             oc = conc.getCompany();
+            if(oc == null)
+            {
+                oc = new OurCompany();
+            }
 
         }
     }

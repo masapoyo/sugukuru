@@ -13,7 +13,7 @@ namespace IHWork
 {
     public partial class login : Form
     {
-        IHWork.MySqlConnections cnct;
+        MySqlConnections cnct;
         Employees emp;
         public login()
         {

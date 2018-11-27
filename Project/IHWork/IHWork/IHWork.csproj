@@ -83,12 +83,19 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="invoiceFormat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="invoiceFormat.Designer.cs">
+      <DependentUpon>invoiceFormat.cs</DependentUpon>
+    </Compile>
     <Compile Include="login.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="login.Designer.cs">
       <DependentUpon>login.cs</DependentUpon>
     </Compile>
+    <Compile Include="MySqlConnections.cs" />
     <Compile Include="OrderCheck.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +155,9 @@
     <EmbeddedResource Include="deliveryList.resx">
       <DependentUpon>deliveryList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="invoiceFormat.resx">
+      <DependentUpon>invoiceFormat.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="login.resx">
       <DependentUpon>login.cs</DependentUpon>
     </EmbeddedResource>
@@ -194,6 +204,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="invoiceFormat.PNG" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
