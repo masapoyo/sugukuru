@@ -122,6 +122,9 @@ namespace IHWork
                         case 2:
                             dgvOrdersList.Rows[i].Cells[4].Value = "MT";
                             break;
+                        case 3:
+                            dgvOrdersList.Rows[i].Cells[4].Value = "CVT";
+                            break;
                     }
                 }
 

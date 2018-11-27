@@ -84,6 +84,9 @@ namespace IHWork
                 case 2:
                     lb_transmission_fund_type.Text = "MT";
                     break;
+                case 3:
+                    lb_transmission_fund_type.Text = "CVT";
+                    break;
             }
             lb_remarks.Text = this._order.getNote();
             lb_rep.Text = this._rep.getName();

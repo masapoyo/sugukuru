@@ -48,12 +48,22 @@ namespace IHWork
 
         private void OrderCheck_Load(object sender, EventArgs e)
         {
+            //デバッグ用
+            this._rep.setId("aaaa0001".ToString());
+
             //デバッガーにヘッダーとして画面名を表示
             Debug.WriteLine("--[依頼情報入力／編集画面]------");
 
             //デバッガーに受信した情報を表示
             Debug.WriteLine("-----受信データ-----");
-            Debug.WriteLine("id: " + this._customer.getId());
+            Debug.WriteLine("顧客id: " + this._customer.getId());
+            Debug.WriteLine("受注no: " + this._order.getNo());
+
+            //AT・MTをコンボボックスに登録
+            cbTransmission.Items.Add("");
+            cbTransmission.Items.Add("AT");
+            cbTransmission.Items.Add("MT");
+            cbTransmission.Items.Add("CVT");
 
             //デバッガーに情報の種類を表示
             Debug.WriteLine("-----フェーズ-----");
@@ -89,6 +99,12 @@ namespace IHWork
             btChange.Visible = false;
             btSubmit.Enabled = true;
             btSubmit.Text = "決定";
+
+            //AT・MTの選択
+            rbLess.Checked = true;
+            rbNear.Checked = false;
+
+            cbTransmission.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -105,7 +121,26 @@ namespace IHWork
             btSubmit.Text = "受注消込";
 
             //値を引き継ぐ
-
+            tbCarName.Text = this._order.getCarName();
+            tbCarYear.Text = this._order.getCarYear();
+            tbModel.Text = this._order.getCarModel();
+            tbColor.Text = this._order.getCarColor();
+            tbMileage.Text = this._order.getCarMileage().ToString();
+            tbBudget.Text = this._order.getBudget().ToString();
+            if(this._order.isAround())
+            {
+                rbLess.Checked = false;
+                rbNear.Checked = true;
+            } else
+            {
+                rbLess.Checked = true;
+                rbNear.Checked = false;
+            }
+            cbTransmission.SelectedIndex = this._order.getTransmission();
+            tbNote.Text = this._order.getNote();
+            tbContracted.Text = this._order.getContracted().ToString();
+            tbExpenses.Text = this._order.getExpenses().ToString();
+            tbCommision.Text = this._order.getCommision().ToString();
         }
 
         /// <summary>
@@ -113,69 +148,15 @@ namespace IHWork
         /// </summary>
         private void btSubmit_Click(object sender, EventArgs e)
         {
-            this._cnct = new MySqlConnection(this._dbCnctStr);
-            this._order = new Orders();
+            inputOrder(true);
+        }
 
-            //エンティティに設定
-            this._order.setCarName(tbCarName.Text.ToString());
-            this._order.setCarYear(tbCarYear.Text.ToString());
-            this._order.setCarModel(tbModel.Text.ToString());
-            this._order.setCarColor(tbColor.Text.ToString());
-            this._order.setCarMileage(Double.Parse(tbMileage.Text.ToString()));
-            this._order.setBudget(Int32.Parse(tbBudget.Text.ToString()));
-            if(rbLess.Checked)
-            {
-                this._order.setBudgetCategory(false);
-            } else if(rbNear.Checked)
-            {
-                this._order.setBudgetCategory(true);
-            }
-            //this._order.setTransmission();
-            this._order.setNote(tbNote.Text.ToString());
-            //this._order.receiveRep();
-
-            //デバッグ用
-            this._order.setTransmission(1);
-            this._order.setRep("aaaa0001".ToString());
-            //データベースに挿入
-            String sql = "INSERT INTO t_orders " +
-            "(customer, rep, car_name, car_year, car_model, car_color, car_mileage, budget, budget_category, transmission, note) " +
-            "VALUES " +
-            "(@customer, @rep, @carName, @carYear, @carModel, @carColor, @carMileage, @budget, @around, @transmission, @note)";
-
-            try
-            {
-                this._cnct.Open();
-
-                MySqlCommand cmd = new MySqlCommand(sql, this._cnct);
-
-                // インジェクション対策。
-                cmd.Parameters.Add(new MySqlParameter("customer", this._customer.getId()));
-                cmd.Parameters.Add(new MySqlParameter("rep", this._order.getRep()));
-                cmd.Parameters.Add(new MySqlParameter("carName", this._order.getCarName()));
-                cmd.Parameters.Add(new MySqlParameter("carYear", this._order.getCarYear()));
-                cmd.Parameters.Add(new MySqlParameter("carModel", this._order.getCarModel()));
-                cmd.Parameters.Add(new MySqlParameter("carColor", this._order.getCarColor()));
-                cmd.Parameters.Add(new MySqlParameter("carMileage", this._order.getCarMileage()));
-                cmd.Parameters.Add(new MySqlParameter("budget", this._order.getBudget()));
-                cmd.Parameters.Add(new MySqlParameter("around", this._order.isAround()));
-                cmd.Parameters.Add(new MySqlParameter("transmission", this._order.getTransmission()));
-                cmd.Parameters.Add(new MySqlParameter("note", this._order.getNote()));
-
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
-                Debug.WriteLine(Convert.ToString(ex));
-            }
-            finally
-            {
-                if (this._cnct != null)
-                {
-                    this._cnct.Close();
-                }
-            }
+        /// <summary>
+        /// 変更ボタン押下時のメソッド
+        /// </summary>
+        private void btChange_Click(object sender, EventArgs e)
+        {
+            inputOrder(false);
         }
 
         /// <summary>
@@ -216,6 +197,112 @@ namespace IHWork
         internal void receiveRep(Employees rep)
         {
             this._rep = rep;
+        }
+
+        /// <summary>
+        /// 入力・編集両方に必要な項目をエンティティに代入するメソッド
+        /// </summary>
+        /// 
+        /// <param name="which">どちらのボタンが押されたか（FALSE=変更、TRUE=受注消込）</param>
+        private void inputOrder(Boolean which)
+        {
+            this._cnct = new MySqlConnection(this._dbCnctStr);
+            this._order = new Orders();
+
+            //エンティティに設定
+            this._order.setCarName(tbCarName.Text.ToString());
+            this._order.setCarYear(tbCarYear.Text.ToString());
+            this._order.setCarModel(tbModel.Text.ToString());
+            this._order.setCarColor(tbColor.Text.ToString());
+            this._order.setCarMileage(Double.Parse(tbMileage.Text.ToString()));
+            this._order.setBudget(Int32.Parse(tbBudget.Text.ToString()));
+            if (rbLess.Checked)
+            {
+                this._order.setBudgetCategory(false);
+            }
+            else if (rbNear.Checked)
+            {
+                this._order.setBudgetCategory(true);
+            }
+            this._order.setTransmission(cbTransmission.SelectedIndex);
+            this._order.setNote(tbNote.Text.ToString());
+            this._order.setContracted(Int32.Parse(tbContracted.Text.ToString()));
+            this._order.setExpenses(Int32.Parse(tbExpenses.Text.ToString()));
+            this._order.setCommision(Int32.Parse(tbCommision.Text.ToString()));
+
+            //データベースに挿入
+            String sql = "";
+            switch (this._mode) {
+                case INPUT_MODE:
+                    sql = "INSERT INTO t_orders " +
+                    "(customer, rep, car_name, car_year, car_model, car_color, car_mileage, budget, budget_category, transmission, note) " +
+                    "VALUES " +
+                    "(@customer, @rep, @carName, @carYear, @carModel, @carColor, @carMileage, @budget, @around, @transmission, @note)";
+                    break;
+                case MODIFICATION_MODE:
+                    sql = "UPDATE t_orders SET " +
+                    "customer = @customer, " +
+                    "car_name = @carName, " +
+                    "car_year = @carYear, " +
+                    "car_model = @carModel, " +
+                    "car_color = @carColor, " +
+                    "car_mileage = @carMileage, " +
+                    "budget = @budget, " +
+                    "budget_category = @around, " +
+                    "transmission = @transmission, " +
+                    "note = @note, " +
+                    "cleared = @which, " +
+                    "contracted = @contracted, " +
+                    "expenses = @expenses, " +
+                    "commision = @commision " + 
+                    "WHERE no = @no ";
+                    break;
+            }
+
+            try
+            {
+                this._cnct.Open();
+
+                MySqlCommand cmd = new MySqlCommand(sql, this._cnct);
+
+                // インジェクション対策。
+                cmd.Parameters.Add(new MySqlParameter("customer", this._customer.getId()));
+                cmd.Parameters.Add(new MySqlParameter("rep", this._rep.getId()));
+                cmd.Parameters.Add(new MySqlParameter("carName", this._order.getCarName()));
+                cmd.Parameters.Add(new MySqlParameter("carYear", this._order.getCarYear()));
+                cmd.Parameters.Add(new MySqlParameter("carModel", this._order.getCarModel()));
+                cmd.Parameters.Add(new MySqlParameter("carColor", this._order.getCarColor()));
+                cmd.Parameters.Add(new MySqlParameter("carMileage", this._order.getCarMileage()));
+                cmd.Parameters.Add(new MySqlParameter("budget", this._order.getBudget()));
+                cmd.Parameters.Add(new MySqlParameter("around", this._order.isAround()));
+                cmd.Parameters.Add(new MySqlParameter("transmission", this._order.getTransmission()));
+                cmd.Parameters.Add(new MySqlParameter("note", this._order.getNote()));
+
+                if (this._mode == MODIFICATION_MODE)
+                {
+                    cmd.Parameters.Add(new MySqlParameter("no", this._order.getNo()));
+                    cmd.Parameters.Add(new MySqlParameter("contracted", this._order.getContracted()));
+                    cmd.Parameters.Add(new MySqlParameter("expenses", this._order.getExpenses()));
+                    cmd.Parameters.Add(new MySqlParameter("commision", this._order.getCommision()));
+                    cmd.Parameters.Add(new MySqlParameter("which", which));
+                }
+
+                int count = cmd.ExecuteNonQuery();
+                Debug.WriteLine("更新件数: " + count.ToString());
+                Debug.WriteLine("no: " + this._order.getNo().ToString());
+            }
+            catch (Exception ex)
+            {
+                Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
+                Debug.WriteLine(Convert.ToString(ex));
+            }
+            finally
+            {
+                if (this._cnct != null)
+                {
+                    this._cnct.Close();
+                }
+            }
         }
     }
 }

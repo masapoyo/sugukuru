@@ -205,6 +205,7 @@
             this.btChange.TabIndex = 19;
             this.btChange.Text = "変更";
             this.btChange.UseVisualStyleBackColor = true;
+            this.btChange.Click += new System.EventHandler(this.btChange_Click);
             // 
             // rbLess
             // 
