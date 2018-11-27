@@ -20,6 +20,7 @@ namespace IHWork
         private int taxp = 8;
         //前画面からの情報
         private List<Orders> _alOrder = new List<Orders>();
+        private System.Collections.ArrayList alId = new System.Collections.ArrayList();
         //税額
         private int tax = 0;
         private int allMoney = 0;
@@ -32,10 +33,12 @@ namespace IHWork
             InitializeComponent();
         }
         
-        internal void receiveOrders(List<Orders> invo)
+        internal void receiveData(List<Orders> invo, System.Collections.ArrayList ids)
         {
             _alOrder = invo;
+            alId = ids;
         }
+        
 
         //ボタンの設定
         private void invoiceFormat_Load(object sender, EventArgs e)
@@ -150,7 +153,26 @@ namespace IHWork
         {
             MySqlConnections conc = new MySqlConnections();
             oc = conc.getCompany();
+            if(oc == null)
+            {
+                oc = new OurCompany();
+            }
 
+        }
+
+        private void btPrin_Click(object sender, EventArgs e)
+        {
+            MySqlConnections conc = new MySqlConnections();
+            alId.Add("1");
+            alId.Add("2");
+            conc.insertBills(alId);
+            
+            paymentReference pr = new paymentReference();
+            this.Hide();
+            pr.ShowDialog();
+            this.Close();
+            //オブジェクトが閉じたら
+            pr.Dispose();
         }
     }
 }

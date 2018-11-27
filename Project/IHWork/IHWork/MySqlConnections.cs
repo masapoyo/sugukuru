@@ -20,7 +20,7 @@ namespace IHWork
 
         public MySqlConnections()
         {
-            this.ConStr = ConfigurationManager.AppSettings["DdConKey"];
+            this.ConStr = ConfigurationManager.AppSettings["DbConKey"];
             con = new MySqlConnection(this.ConStr);
         }
 
@@ -117,5 +117,58 @@ namespace IHWork
             return oc;
         }
 
+        //インサート分
+        //
+        public void insertBills(System.Collections.ArrayList ids)
+        {
+            //t_billsにインサート
+            String insBills = "insert into t_bills () values()";
+            //id取得用 t_bills
+            String lastId = "SELECT no FROM t_bills order by no desc limit 1;";
+            this.dset = new DataSet("t_bills");
+            //t_bills_delivered にインサート
+            String insDeli = "insert into t_billed_delivered " +
+                "( deliverable_no, bill_no) " +
+                "VALUES " +
+                "(@deli, @bill)";
+            try
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand(insBills, con);
+                //インサート
+                cmd.ExecuteNonQuery();                
+
+                //id 取得
+                // データアダプター作成
+                MySqlDataAdapter mAdp = new MySqlDataAdapter(lastId, this.con);
+                // データ抽出＆取得
+                mAdp.Fill(dset, "t_bills");
+                lastId = dset.Tables["t_bills"].Rows[0]["no"].ToString();
+
+                //インジェクション対策
+                for (int i = 0; i < ids.Count; i++)
+                {
+                    //t_billed_delliveredにインサート
+                    cmd = new MySqlCommand(insDeli, this.con);
+                    cmd.Parameters.Add(new MySqlParameter("deli", ids[i]));
+                    cmd.Parameters.Add(new MySqlParameter("bill", lastId));
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(Convert.ToString(ex));
+                return;
+            }
+            finally
+            {
+                this.con.Close();
+            }
+
+
+            return;
+        }
     }
+
+   
 }
