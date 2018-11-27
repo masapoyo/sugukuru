@@ -77,5 +77,45 @@ namespace IHWork
             return emp;
         }
 
+        public OurCompany getCompany()
+        {
+            OurCompany oc = new OurCompany();
+            this.dset = new DataSet("m_our_company");
+            String sql = "select " +
+                "   *" +
+                " from " +
+                "   m_our_company" +
+                " where" +
+                "   id = 1";
+            try
+            {
+                //SQL接続
+                con.Open();
+                // データアダプター作成
+                MySqlDataAdapter mAdp = new MySqlDataAdapter(sql, this.con);
+                // データ抽出＆取得
+                mAdp.Fill(dset, "m_our_company");
+
+                oc.setZipCode(dset.Tables["m_our_company"].Rows[0]["zip_code"].ToString());
+                oc.setPhonetic(dset.Tables["m_our_company"].Rows[0]["phonetic"].ToString());
+                oc.setName(dset.Tables["m_our_company"].Rows[0]["name"].ToString());
+                oc.setAddress(dset.Tables["m_our_company"].Rows[0]["address"].ToString());
+                oc.setPhone(dset.Tables["m_our_company"].Rows[0]["phone"].ToString());
+                oc.setFax(dset.Tables["m_our_company"].Rows[0]["fax"].ToString());
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(Convert.ToString(ex));
+                return null;
+            }
+            finally
+            {
+                this.con.Close();
+            }
+
+            return oc;
+        }
+
     }
 }

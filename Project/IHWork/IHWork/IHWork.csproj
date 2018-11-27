@@ -96,6 +96,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="invoiceFormat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="invoiceFormat.Designer.cs">
+      <DependentUpon>invoiceFormat.cs</DependentUpon>
+    </Compile>
     <Compile Include="login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +168,9 @@
     <EmbeddedResource Include="deliveryList.resx">
       <DependentUpon>deliveryList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="invoiceFormat.resx">
+      <DependentUpon>invoiceFormat.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="login.resx">
       <DependentUpon>login.cs</DependentUpon>
     </EmbeddedResource>
@@ -188,6 +197,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="PurchaseRemainingInformationList.resx">
       <DependentUpon>PurchaseRemainingInformationList.cs</DependentUpon>
@@ -213,6 +223,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="invoiceFormat.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
