@@ -45,6 +45,7 @@ namespace IHWork
                 }
 
                 customerList cL = new customerList();
+                cL.ReceiveData(tbUserId.Text.ToString());
                 this.Hide();
                 cL.ShowDialog();
                 this.Close();

@@ -26,14 +26,23 @@ namespace IHWork
         private String _customerName;
         private MySqlConnection _cnct;
         private List<Customers> _list;
+        private string _emId; //社員ID
 
         public customerList()
         {
             InitializeComponent();
 
+            this._emId = "";
+
             //コネクタの宣言
             this._dbCnctStr = ConfigurationManager.AppSettings["DbConKey"];
             this._cnct = new MySqlConnection(this._dbCnctStr);
+        }
+
+        //ログイン画面から値を受け取るメソッド
+        public void ReceiveData(string emId)
+        {
+            this._emId = emId;
         }
 
         private void customerList_Load(object sender, EventArgs e)
@@ -136,6 +145,7 @@ namespace IHWork
 
             //顧客情報を遷移先に格納
             OrderCheck f = new OrderCheck();
+            f.ReceiveEmId(this._emId);
             this.Hide();
 
             f.receiveMode(OrderCheck.INPUT_MODE);   //受注フェーズであることを明示

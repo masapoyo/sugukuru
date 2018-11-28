@@ -97,3 +97,5 @@ C:\Users\masap\Documents\sugukuru\Project\IHWork\IHWork\bin\Debug\MySql.Data.dll
 C:\Users\masap\Documents\sugukuru\Project\IHWork\IHWork\bin\Debug\Google.Protobuf.dll
 C:\Users\masap\Documents\sugukuru\Project\IHWork\IHWork\bin\Debug\MySql.Data.xml
 C:\Users\masap\Documents\sugukuru\Project\IHWork\IHWork\obj\Debug\IHWork.csproj.CopyComplete
+C:\Users\ohs60224\Documents\sugukuru\Project\IHWork\IHWork\obj\Debug\IHWork.invoiceFormat.resources
+C:\Users\ohs60224\Documents\sugukuru\Project\IHWork\IHWork\obj\Debug\IHWork.paymentAll.resources

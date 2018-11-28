@@ -39,26 +39,28 @@ namespace IHWork
         private int _mode;
         private Employees _rep;
         private int _orderNo;
+        private string _emId; //社員ID
 
         
         public OrderCheck()
         {
             InitializeComponent();
+            this._emId = "";
             this._dbCnctStr = ConfigurationManager.AppSettings["DbConKey"];
         }
 
         private void OrderCheck_Load(object sender, EventArgs e)
         {
             //デバッグ用
-            this._rep.setId("aaaa0001".ToString());
+            //this._rep.setId("aaaa0001".ToString());
 
             //デバッガーにヘッダーとして画面名を表示
-            Debug.WriteLine("--[依頼情報入力／編集画面]------");
+            //Debug.WriteLine("--[依頼情報入力／編集画面]------");
 
             //デバッガーに受信した情報を表示
-            Debug.WriteLine("-----受信データ-----");
-            Debug.WriteLine("顧客id: " + this._customer.getId());
-            Debug.WriteLine("受注no: " + this._order.getNo());
+            //Debug.WriteLine("-----受信データ-----");
+            //Debug.WriteLine("顧客id: " + this._customer.getId());
+            //Debug.WriteLine("受注no: " + this._order.getNo());
 
             //AT・MTをコンボボックスに登録
             cbTransmission.Items.Add("");
@@ -67,17 +69,17 @@ namespace IHWork
             cbTransmission.Items.Add("CVT");
 
             //デバッガーに情報の種類を表示
-            Debug.WriteLine("-----フェーズ-----");
+            //Debug.WriteLine("-----フェーズ-----");
             switch (this._mode)
             {
                 case INPUT_MODE:    //受注フェーズの場合
-                    Debug.WriteLine("フェーズ: 受注");   //デバッガーに現在のフェーズを表示
+                    //Debug.WriteLine("フェーズ: 受注");   //デバッガーに現在のフェーズを表示
 
                     onCreateInputView();
 
                     break;
                 case MODIFICATION_MODE: //仕入フェーズの場合
-                    Debug.WriteLine("フェーズ: 仕入");   //デバッガーに現在のフェーズを表示
+                    //Debug.WriteLine("フェーズ: 仕入");   //デバッガーに現在のフェーズを表示
 
                     onCreateModificationView();
 
@@ -190,6 +192,12 @@ namespace IHWork
             this.Dispose();
         }
 
+        //顧客一覧画面から値を受け取るメソッド
+        public void ReceiveEmId(string emId)
+        {
+            this._emId = emId; //顧客ID
+        }
+
         /// <summary>
         /// 選択した顧客情報を受け取るメソッド
         /// </summary>
@@ -243,6 +251,8 @@ namespace IHWork
 
             //エンティティに設定
             this._order.setNo(this._orderNo);
+            this._order.setCustomer(this._customer.getId());
+            this._order.setRep(this._emId);
             this._order.setCarName(tbCarName.Text.ToString());
             this._order.setCarYear(tbCarYear.Text.ToString());
             this._order.setCarModel(tbModel.Text.ToString());
@@ -259,12 +269,20 @@ namespace IHWork
             }
             this._order.setTransmission(cbTransmission.SelectedIndex);
             this._order.setNote(tbNote.Text.ToString());
-            this._order.setContracted(Int32.Parse(tbContracted.Text.ToString()));
-            this._order.setExpenses(Int32.Parse(tbExpenses.Text.ToString()));
-            this._order.setCommision(Int32.Parse(tbCommision.Text.ToString()));
 
-            //データベースに挿入
-            String sql = "";
+            switch (this._mode)
+            {
+                case INPUT_MODE:
+                    break;
+                case MODIFICATION_MODE:
+                    this._order.setContracted(Int32.Parse(tbContracted.Text.ToString()));
+                    this._order.setExpenses(Int32.Parse(tbExpenses.Text.ToString()));
+                    this._order.setCommision(Int32.Parse(tbCommision.Text.ToString()));
+                    break;
+            }
+
+                    //データベースに挿入
+                    String sql = "";
             switch (this._mode) {
                 case INPUT_MODE:
                     sql = "INSERT INTO t_orders " +
@@ -301,8 +319,10 @@ namespace IHWork
                 MySqlCommand cmd = new MySqlCommand(sql, this._cnct);
 
                 // インジェクション対策。
-                cmd.Parameters.Add(new MySqlParameter("customer", this._customer.getId()));
-                cmd.Parameters.Add(new MySqlParameter("rep", this._rep.getId()));
+                //cmd.Parameters.Add(new MySqlParameter("customer", this._customer.getId()));
+                cmd.Parameters.Add(new MySqlParameter("customer", this._order.getCustomer()));
+                //cmd.Parameters.Add(new MySqlParameter("rep", this._rep.getId()));
+                cmd.Parameters.Add(new MySqlParameter("rep", this._emId));
                 cmd.Parameters.Add(new MySqlParameter("carName", this._order.getCarName()));
                 cmd.Parameters.Add(new MySqlParameter("carYear", this._order.getCarYear()));
                 cmd.Parameters.Add(new MySqlParameter("carModel", this._order.getCarModel()));
