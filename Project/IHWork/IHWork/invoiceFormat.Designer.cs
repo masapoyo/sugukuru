@@ -198,5 +198,6 @@
         private System.Windows.Forms.TextBox tbAddres;
         private System.Windows.Forms.TextBox tbPost;
         private System.Windows.Forms.Button btPrin;
+
     }
 }

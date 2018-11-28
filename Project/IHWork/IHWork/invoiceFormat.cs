@@ -21,6 +21,7 @@ namespace IHWork
         //前画面からの情報
         private List<Orders> _alOrder = new List<Orders>();
         private System.Collections.ArrayList alId = new System.Collections.ArrayList();
+
         //税額
         private int tax = 0;
         private int allMoney = 0;
@@ -32,13 +33,13 @@ namespace IHWork
         {
             InitializeComponent();
         }
-        
+
         internal void receiveData(List<Orders> invo, System.Collections.ArrayList ids)
         {
             _alOrder = invo;
             alId = ids;
         }
-        
+       
 
         //ボタンの設定
         private void invoiceFormat_Load(object sender, EventArgs e)
@@ -172,5 +173,6 @@ namespace IHWork
             //オブジェクトが閉じたら
             pr.Dispose();
         }
+
     }
 }

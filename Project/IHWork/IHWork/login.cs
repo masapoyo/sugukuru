@@ -14,7 +14,7 @@ namespace IHWork
 {
     public partial class login : Form
     {
-        MySqlConnection cnct;
+        MySqlConnections cnct;
         Employees emp;
         public login()
         {
@@ -23,7 +23,9 @@ namespace IHWork
 
         private void btLogin_Click(object sender, EventArgs e)
         {
-            cnct = new MySqlConnection();
+            cnct = new MySqlConnections();
+
+
             emp = new Employees();
             //入力値チェック
             if (!"".Equals(tbUserId.Text.ToString()) && !"".Equals(tbPassword.Text.ToString()))
@@ -33,7 +35,7 @@ namespace IHWork
                     //テキスト取得    
                     String id = tbUserId.Text.ToString();
                     String pass = tbPassword.Text.ToString();
-                    //emp = this.cnct.CheckLogin(id, pass);
+                    emp = this.cnct.CheckLogin(id, pass);
                     MessageBox.Show("ログイン完了 " + emp.getName(), "OK");
                 }
                 catch
