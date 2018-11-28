@@ -38,6 +38,7 @@ namespace IHWork
         private Orders _order;
         private int _mode;
         private Employees _rep;
+        private int _orderNo;
 
         
         public OrderCheck()
@@ -149,6 +150,23 @@ namespace IHWork
         private void btSubmit_Click(object sender, EventArgs e)
         {
             inputOrder(true);
+
+            switch(this._mode)
+            {
+                case INPUT_MODE:
+                    openOrdersList();
+                    break;
+                case MODIFICATION_MODE:
+                    this.Hide();
+                    OrderInformationConfirmationScreen f = new OrderInformationConfirmationScreen();
+                    f.receiveMode(OrderInformationConfirmationScreen.PRINTING_MODE);
+                    f.receiveOrder(this._order);
+                    f.receiveRep(this._rep);
+                    f.ShowDialog();
+                    this.Dispose();
+
+                    break;
+            }
         }
 
         /// <summary>
@@ -157,6 +175,19 @@ namespace IHWork
         private void btChange_Click(object sender, EventArgs e)
         {
             inputOrder(false);
+
+            openOrdersList();
+        }
+
+        /// <summary>
+        /// 受注一覧画面を表示するメソッド
+        /// </summary>
+        private void openOrdersList()
+        {
+            PurchaseRemainingInformationList f = new PurchaseRemainingInformationList();
+            this.Hide();
+            f.ShowDialog();
+            this.Dispose();
         }
 
         /// <summary>
@@ -187,6 +218,7 @@ namespace IHWork
         internal void receiveOrder(Orders order)
         {
             this._order = order;
+            this._orderNo = this._order.getNo();
         }
 
         /// <summary>
@@ -210,6 +242,7 @@ namespace IHWork
             this._order = new Orders();
 
             //エンティティに設定
+            this._order.setNo(this._orderNo);
             this._order.setCarName(tbCarName.Text.ToString());
             this._order.setCarYear(tbCarYear.Text.ToString());
             this._order.setCarModel(tbModel.Text.ToString());
@@ -259,6 +292,8 @@ namespace IHWork
                     break;
             }
 
+            Debug.WriteLine("SQL: \n" + sql);
+
             try
             {
                 this._cnct.Open();
@@ -280,11 +315,11 @@ namespace IHWork
 
                 if (this._mode == MODIFICATION_MODE)
                 {
-                    cmd.Parameters.Add(new MySqlParameter("no", this._order.getNo()));
                     cmd.Parameters.Add(new MySqlParameter("contracted", this._order.getContracted()));
                     cmd.Parameters.Add(new MySqlParameter("expenses", this._order.getExpenses()));
                     cmd.Parameters.Add(new MySqlParameter("commision", this._order.getCommision()));
                     cmd.Parameters.Add(new MySqlParameter("which", which));
+                    cmd.Parameters.Add(new MySqlParameter("no", this._order.getNo()));
                 }
 
                 int count = cmd.ExecuteNonQuery();
