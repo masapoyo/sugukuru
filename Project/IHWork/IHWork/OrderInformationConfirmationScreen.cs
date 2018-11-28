@@ -90,10 +90,13 @@ namespace IHWork
             }
             lb_remarks.Text = this._order.getNote();
             lb_rep.Text = this._rep.getName();
-            lbWinning.Text = this._order.getContracted().ToString();
-            lbExpen.Text = this._order.getExpenses().ToString();
-            lbBuy.Text = this._order.getCommision().ToString();
-            lbSum.Text = (this._order.getContracted() + this._order.getExpenses() + this._order.getCommision()).ToString();
+            if (this._order.getContracted() != null)
+            {
+                lbWinning.Text = this._order.getContracted().ToString();
+                lbExpen.Text = this._order.getExpenses().ToString();
+                lbBuy.Text = this._order.getCommision().ToString();
+                lbSum.Text = (this._order.getContracted() + this._order.getExpenses() + this._order.getCommision()).ToString();
+            }
         }
 
         /// <summary>
@@ -153,6 +156,15 @@ namespace IHWork
             f.receiveRep(this._rep);    //該当の担当者を送信
             f.ShowDialog();
 
+            this.Dispose();
+        }
+
+        private void btPrint_Click(object sender, EventArgs e)
+        {
+            deliveryList f = new deliveryList();
+            
+            f.ShowDialog();
+            this.Hide();
             this.Dispose();
         }
     }

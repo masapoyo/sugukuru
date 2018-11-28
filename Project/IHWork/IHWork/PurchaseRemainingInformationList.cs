@@ -97,9 +97,16 @@ namespace IHWork
                     o.setNote(dsCustomers.Tables["v_orders"].Rows[i]["note"].ToString());
                     o.setReceivedAt(dsCustomers.Tables["v_orders"].Rows[i]["received_at"].ToString());
                     o.setCleared(Boolean.Parse(dsCustomers.Tables["v_orders"].Rows[i]["cleared"].ToString()));
-                    o.setContracted(Int32.Parse(dsCustomers.Tables["v_orders"].Rows[i]["contracted"].ToString()));
-                    o.setExpenses(Int32.Parse(dsCustomers.Tables["v_orders"].Rows[i]["expenses"].ToString()));
-                    o.setCommision(Int32.Parse(dsCustomers.Tables["v_orders"].Rows[i]["commision"].ToString()));
+                    if (dsCustomers.Tables["v_orders"].Rows[i]["contracted"] != null) {
+                        o.setContracted(Int32.Parse(dsCustomers.Tables["v_orders"].Rows[i]["contracted"].ToString()));
+                        o.setExpenses(Int32.Parse(dsCustomers.Tables["v_orders"].Rows[i]["expenses"].ToString()));
+                        o.setCommision(Int32.Parse(dsCustomers.Tables["v_orders"].Rows[i]["commision"].ToString()));
+                    } else
+                    {
+                        o.setContracted(0);
+                        o.setExpenses(0);
+                        o.setCommision(0);
+                    }
                     o.setCustomer(dsCustomers.Tables["v_orders"].Rows[i]["customer_id"].ToString());
                     o.setRep(dsCustomers.Tables["v_orders"].Rows[i]["rep_id"].ToString());
 

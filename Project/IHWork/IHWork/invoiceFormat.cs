@@ -27,6 +27,7 @@ namespace IHWork
         private int allMoney = 0;
 
         private OurCompany oc;
+        private Customers customer;
         private List<Orders> invo;
         //コンストラクト
         public invoiceFormat()
@@ -116,8 +117,7 @@ namespace IHWork
                 allMoney += order.getContracted() + order.getExpenses();
                 //摘要
                 tbTbl[4].Text = order.getNote();
-                //取引先名
-                tbWho.Text = _alOrder[0].getRep();
+
             }
 
             tax = (allMoney * taxp) / 100;
@@ -140,6 +140,9 @@ namespace IHWork
             tbDay.Text = dt.ToShortDateString().Substring(8, 2);
 
             this.getOurCompany();
+            this.getCust();
+            //取引先名
+            tbWho.Text = customer.getName();
             tbCOName.Text = oc.getName();
             tbPost.Text = oc.getZipCode();
             tbAddres.Text = oc.getAddress();
@@ -157,6 +160,24 @@ namespace IHWork
             if(oc == null)
             {
                 oc = new OurCompany();
+            }
+
+        }
+
+        public void getCust()
+        {
+            MySqlConnections conc = new MySqlConnections();
+            if (_alOrder.Count != 0)
+            {
+                customer = conc.getCostmaer(_alOrder[0].getCustomer().ToString());
+            }
+            else
+            {
+                customer = conc.getCostmaer("1");
+            }
+            if (customer == null)
+            {
+                customer = new Customers();
             }
 
         }

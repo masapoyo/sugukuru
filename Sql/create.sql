@@ -60,9 +60,9 @@ CREATE TABLE t_orders (
     note TEXT,  #備考
     received_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,    #受注日
     cleared BOOLEAN NOT NULL DEFAULT FALSE, #受注消込
-    contracted DECIMAL(13, 0) DEFAULT NULL, #落札価格
-    expenses DECIMAL(13, 0) DEFAULT NULL,   #オークション諸経費
-    commision DECIMAL(13, 0) DEFAULT NULL,  #買手数料
+    contracted DECIMAL(13, 0) DEFAULT 0, #落札価格
+    expenses DECIMAL(13, 0) DEFAULT 0,   #オークション諸経費
+    commision DECIMAL(13, 0) DEFAULT 0,  #買手数料
     PRIMARY KEY(no), 
     INDEX(no), 
     FOREIGN KEY (customer) REFERENCES t_customers(id),
