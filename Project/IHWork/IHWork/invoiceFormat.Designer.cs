@@ -40,6 +40,7 @@
             this.tbNumber = new System.Windows.Forms.TextBox();
             this.tbAddres = new System.Windows.Forms.TextBox();
             this.tbPost = new System.Windows.Forms.TextBox();
+            this.btPrin = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbInvoice)).BeginInit();
             this.SuspendLayout();
             // 
@@ -146,11 +147,22 @@
             this.tbPost.Size = new System.Drawing.Size(249, 12);
             this.tbPost.TabIndex = 18;
             // 
+            // btPrin
+            // 
+            this.btPrin.Location = new System.Drawing.Point(673, 503);
+            this.btPrin.Name = "btPrin";
+            this.btPrin.Size = new System.Drawing.Size(109, 38);
+            this.btPrin.TabIndex = 19;
+            this.btPrin.Text = "印刷";
+            this.btPrin.UseVisualStyleBackColor = true;
+            this.btPrin.Click += new System.EventHandler(this.btPrin_Click);
+            // 
             // invoiceFormat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(794, 553);
+            this.Controls.Add(this.btPrin);
             this.Controls.Add(this.tbPost);
             this.Controls.Add(this.tbAddres);
             this.Controls.Add(this.tbNumber);
@@ -185,5 +197,7 @@
         private System.Windows.Forms.TextBox tbNumber;
         private System.Windows.Forms.TextBox tbAddres;
         private System.Windows.Forms.TextBox tbPost;
+        private System.Windows.Forms.Button btPrin;
+
     }
 }

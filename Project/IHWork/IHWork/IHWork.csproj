@@ -111,6 +111,12 @@
     </Compile>
     <Compile Include="Entities\Orders.cs" />
     <Compile Include="Entities\OurCompany.cs" />
+    <Compile Include="paymentAll.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="paymentAll.Designer.cs">
+      <DependentUpon>paymentAll.cs</DependentUpon>
+    </Compile>
     <Compile Include="paymentListAndInvoice.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OrderInformationConfirmationScreen.resx">
       <DependentUpon>OrderInformationConfirmationScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="paymentAll.resx">
+      <DependentUpon>paymentAll.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="paymentListAndInvoice.resx">
       <DependentUpon>paymentListAndInvoice.cs</DependentUpon>

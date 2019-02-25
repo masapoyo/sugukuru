@@ -20,22 +20,27 @@ namespace IHWork
         private int taxp = 8;
         //前画面からの情報
         private List<Orders> _alOrder = new List<Orders>();
+        private System.Collections.ArrayList alId = new System.Collections.ArrayList();
+
         //税額
         private int tax = 0;
         private int allMoney = 0;
 
         private OurCompany oc;
+        private Customers customer;
         private List<Orders> invo;
         //コンストラクト
         public invoiceFormat()
         {
             InitializeComponent();
         }
-        
-        internal void receiveOrders(List<Orders> invo)
+
+        internal void receiveData(List<Orders> invo, System.Collections.ArrayList ids)
         {
             _alOrder = invo;
+            alId = ids;
         }
+       
 
         //ボタンの設定
         private void invoiceFormat_Load(object sender, EventArgs e)
@@ -112,8 +117,7 @@ namespace IHWork
                 allMoney += order.getContracted() + order.getExpenses();
                 //摘要
                 tbTbl[4].Text = order.getNote();
-                //取引先名
-                tbWho.Text = _alOrder[0].getRep();
+
             }
 
             tax = (allMoney * taxp) / 100;
@@ -136,6 +140,9 @@ namespace IHWork
             tbDay.Text = dt.ToShortDateString().Substring(8, 2);
 
             this.getOurCompany();
+            this.getCust();
+            //取引先名
+            tbWho.Text = customer.getName();
             tbCOName.Text = oc.getName();
             tbPost.Text = oc.getZipCode();
             tbAddres.Text = oc.getAddress();
@@ -156,5 +163,37 @@ namespace IHWork
             }
 
         }
+
+        public void getCust()
+        {
+            MySqlConnections conc = new MySqlConnections();
+            if (_alOrder.Count != 0)
+            {
+                customer = conc.getCostmaer(_alOrder[0].getCustomer().ToString());
+            }
+            else
+            {
+                customer = conc.getCostmaer("1");
+            }
+            if (customer == null)
+            {
+                customer = new Customers();
+            }
+
+        }
+
+        private void btPrin_Click(object sender, EventArgs e)
+        {
+            MySqlConnections conc = new MySqlConnections();
+            conc.insertBills(alId);
+            //画面出力
+            paymentReference pr = new paymentReference();
+            this.Hide();
+            pr.ShowDialog();
+            this.Close();
+            //オブジェクトが閉じたら
+            pr.Dispose();
+        }
+
     }
 }

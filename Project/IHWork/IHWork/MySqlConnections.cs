@@ -117,5 +117,101 @@ namespace IHWork
             return oc;
         }
 
+        //顧客情報取得
+        public Customers getCostmaer(String id)
+        {
+            Customers oc = new Customers();
+            this.dset = new DataSet("t_customers");
+            String sql = "select " +
+                "   *" +
+                " from " +
+                "   t_customers" +
+                " where" +
+                "   id = @id";
+            try
+            {
+                //SQL接続
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand(sql, this.con);
+                //インジェクション対策
+                cmd.Parameters.Add(new MySqlParameter("id", id));
+                // データアダプター作成
+                MySqlDataAdapter mAdp = new MySqlDataAdapter(cmd);
+                // データ抽出＆取得
+                mAdp.Fill(dset, "t_customers");
+
+                oc.setName(dset.Tables["t_customers"].Rows[0]["name"].ToString());
+                oc.setPhonetic(dset.Tables["t_customers"].Rows[0]["phonetic"].ToString());
+                oc.setZipCode(dset.Tables["t_customers"].Rows[0]["zip_code"].ToString());
+                oc.setAddress(dset.Tables["t_customers"].Rows[0]["address"].ToString());
+                oc.setPhone(dset.Tables["t_customers"].Rows[0]["phone"].ToString());
+                oc.setFax(dset.Tables["t_customers"].Rows[0]["fax"].ToString());
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(Convert.ToString(ex));
+                return null;
+            }
+            finally
+            {
+                this.con.Close();
+            }
+
+            return oc;
+        }
+
+        //インサート分
+        //
+        public void insertBills(System.Collections.ArrayList ids)
+        {
+            //t_billsにインサート
+            String insBills = "insert into t_bills () values()";
+            //id取得用 t_bills
+            String lastId = "SELECT no FROM t_bills order by no desc limit 1;";
+            this.dset = new DataSet("t_bills");
+            //t_bills_delivered にインサート
+            String insDeli = "insert into t_billed_delivered " +
+                "( deliverable_no, bill_no) " +
+                "VALUES " +
+                "(@deli, @bill)";
+            try
+            {
+                con.Open();
+                MySqlCommand cmd = new MySqlCommand(insBills, con);
+                //インサート
+                cmd.ExecuteNonQuery();                
+
+                //id 取得
+                // データアダプター作成
+                MySqlDataAdapter mAdp = new MySqlDataAdapter(lastId, this.con);
+                // データ抽出＆取得
+                mAdp.Fill(dset, "t_bills");
+                lastId = dset.Tables["t_bills"].Rows[0]["no"].ToString();
+
+                //インジェクション対策
+                for (int i = 0; i < ids.Count; i++)
+                {
+                    //t_billed_delliveredにインサート
+                    cmd = new MySqlCommand(insDeli, this.con);
+                    cmd.Parameters.Add(new MySqlParameter("deli", ids[i]));
+                    cmd.Parameters.Add(new MySqlParameter("bill", lastId));
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(Convert.ToString(ex));
+                return;
+            }
+            finally
+            {
+                this.con.Close();
+            }
+
+
+            return;
+        }
     }
+
 }

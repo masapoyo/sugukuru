@@ -31,83 +31,49 @@
         {
             this.lb_title = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dgv_order_list = new System.Windows.Forms.DataGridView();
-            this.tabChose = new System.Windows.Forms.TabControl();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dgvOrdersList = new System.Windows.Forms.DataGridView();
             this.車種名 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.年式 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.型式 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.色 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.変速機構の種別 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabChose = new System.Windows.Forms.TabControl();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_order_list)).BeginInit();
-            this.tabChose.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrdersList)).BeginInit();
+            this.tabChose.SuspendLayout();
             this.SuspendLayout();
             // 
             // lb_title
             // 
             this.lb_title.AutoSize = true;
             this.lb_title.Font = new System.Drawing.Font("MS UI Gothic", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lb_title.Location = new System.Drawing.Point(13, 13);
+            this.lb_title.Location = new System.Drawing.Point(17, 17);
+            this.lb_title.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_title.Name = "lb_title";
-            this.lb_title.Size = new System.Drawing.Size(120, 27);
+            this.lb_title.Size = new System.Drawing.Size(151, 34);
             this.lb_title.TabIndex = 1;
             this.lb_title.Text = "受注一覧";
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.dataGridView1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(567, 399);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage1.Size = new System.Drawing.Size(759, 538);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "買注残";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.dgv_order_list);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(567, 399);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "全体";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // dgv_order_list
-            // 
-            this.dgv_order_list.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_order_list.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.車種名,
-            this.年式,
-            this.型式,
-            this.色,
-            this.変速機構の種別});
-            this.dgv_order_list.Location = new System.Drawing.Point(11, 15);
-            this.dgv_order_list.Name = "dgv_order_list";
-            this.dgv_order_list.RowTemplate.Height = 21;
-            this.dgv_order_list.Size = new System.Drawing.Size(544, 378);
-            this.dgv_order_list.TabIndex = 0;
-            // 
-            // tabChose
-            // 
-            this.tabChose.Controls.Add(this.tabPage2);
-            this.tabChose.Controls.Add(this.tabPage1);
-            this.tabChose.Location = new System.Drawing.Point(-1, 43);
-            this.tabChose.Name = "tabChose";
-            this.tabChose.SelectedIndex = 0;
-            this.tabChose.Size = new System.Drawing.Size(575, 425);
-            this.tabChose.TabIndex = 3;
             // 
             // dataGridView1
             // 
@@ -118,10 +84,11 @@
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5});
-            this.dataGridView1.Location = new System.Drawing.Point(11, 15);
+            this.dataGridView1.Location = new System.Drawing.Point(15, 20);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 21;
-            this.dataGridView1.Size = new System.Drawing.Size(544, 378);
+            this.dataGridView1.Size = new System.Drawing.Size(725, 504);
             this.dataGridView1.TabIndex = 1;
             // 
             // dataGridViewTextBoxColumn1
@@ -149,6 +116,35 @@
             this.dataGridViewTextBoxColumn5.HeaderText = "変速機構の種別";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.dgvOrdersList);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Size = new System.Drawing.Size(759, 538);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "全体";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dgvOrdersList
+            // 
+            this.dgvOrdersList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOrdersList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.車種名,
+            this.年式,
+            this.型式,
+            this.色,
+            this.変速機構の種別});
+            this.dgvOrdersList.Location = new System.Drawing.Point(15, 20);
+            this.dgvOrdersList.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvOrdersList.Name = "dgvOrdersList";
+            this.dgvOrdersList.RowTemplate.Height = 21;
+            this.dgvOrdersList.Size = new System.Drawing.Size(725, 504);
+            this.dgvOrdersList.TabIndex = 0;
+            this.dgvOrdersList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrdersList_CellDoubleClick);
+            // 
             // 車種名
             // 
             this.車種名.HeaderText = "車種名";
@@ -174,20 +170,33 @@
             this.変速機構の種別.HeaderText = "変速機構の種別";
             this.変速機構の種別.Name = "変速機構の種別";
             // 
+            // tabChose
+            // 
+            this.tabChose.Controls.Add(this.tabPage2);
+            this.tabChose.Controls.Add(this.tabPage1);
+            this.tabChose.Location = new System.Drawing.Point(-1, 57);
+            this.tabChose.Margin = new System.Windows.Forms.Padding(4);
+            this.tabChose.Name = "tabChose";
+            this.tabChose.SelectedIndex = 0;
+            this.tabChose.Size = new System.Drawing.Size(767, 567);
+            this.tabChose.TabIndex = 3;
+            // 
             // PurchaseRemainingInformationList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(572, 475);
+            this.ClientSize = new System.Drawing.Size(763, 633);
             this.Controls.Add(this.tabChose);
             this.Controls.Add(this.lb_title);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "PurchaseRemainingInformationList";
             this.Text = "受注一覧";
+            this.Load += new System.EventHandler(this.PurchaseRemainingInformationList_Load);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_order_list)).EndInit();
-            this.tabChose.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrdersList)).EndInit();
+            this.tabChose.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,7 +212,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataGridView dgv_order_list;
+        private System.Windows.Forms.DataGridView dgvOrdersList;
         private System.Windows.Forms.TabControl tabChose;
         private System.Windows.Forms.DataGridViewTextBoxColumn 車種名;
         private System.Windows.Forms.DataGridViewTextBoxColumn 年式;

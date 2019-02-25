@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entities;
+using MySql.Data.MySqlClient;
 
 namespace IHWork
 {
@@ -23,6 +24,8 @@ namespace IHWork
         private void btLogin_Click(object sender, EventArgs e)
         {
             cnct = new MySqlConnections();
+
+
             emp = new Employees();
             //入力値チェック
             if (!"".Equals(tbUserId.Text.ToString()) && !"".Equals(tbPassword.Text.ToString()))
@@ -42,6 +45,7 @@ namespace IHWork
                 }
 
                 customerList cL = new customerList();
+                cL.ReceiveData(tbUserId.Text.ToString());
                 this.Hide();
                 cL.ShowDialog();
                 this.Close();
